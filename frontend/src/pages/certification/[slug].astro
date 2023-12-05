@@ -1,21 +1,29 @@
 ---
 import { sanityClient } from 'sanity:client';
-
+import PortableText from '../../components/PortableText.astro'
 export async function getStaticPaths() {
-  const posts = await sanityClient.fetch(`*[_type == "post"]`);
+  const exams = await sanityClient.fetch(`*[_type == "post"]`);
 
-  return posts.map((post) => {
+  return exams.map((exam) => {
     return {
       params: {
-        slug: post.slug?.current || '',
+        slug: exam.slug?.current || '',
       },
-      props: { ...post },
+      props: { ...exam },
     };
   });
 }
 
-const { title, body } = Astro.props;
+const { title,author, shortDescription, longDescription, learningPathway, examStudyGuide, details } = Astro.props;
 
 ---
 
 <h1>{title}</h1>
+
+<PortableText portableText={author} />
+<PortableText portableText={longDescription} />
+<PortableText portableText={learningPathway} />
+<PortableText portableText={examStudyGuide} />
+<PortableText portableText={details} />
+
+

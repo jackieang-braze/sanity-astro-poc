@@ -1,5 +1,7 @@
 ---
+import { sanityClient } from 'sanity:client';
 
+  const exams = await sanityClient.fetch(`*[_type == "certificationExam"]`);
 ---
 
 <html lang="en">
@@ -12,5 +14,10 @@
 	</head>
 	<body>
 		<h1>Certifications</h1>
+		{exams && <ul>
+			{exams.map((exam) => (
+				<li><a href=`certification/${exam.slug.current}`>{exam.title}</a></li>
+			))}
+		</ul>}
 	</body>
 </html>
