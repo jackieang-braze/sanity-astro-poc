@@ -1,29 +1,46 @@
 ---
-import { sanityClient } from 'sanity:client';
+import { getExam, getExams } from '../../sanity/sanity.ts'
+import type { InferGetStaticParamsType } from 'astro'
 import PortableText from '../../components/PortableText.astro'
+
 export async function getStaticPaths() {
-  const exams = await sanityClient.fetch(`*[_type == "post"]`);
+  const exams = await getExams()
 
   return exams.map((exam) => {
     return {
       params: {
         slug: exam.slug?.current || '',
       },
-      props: { ...exam },
-    };
-  });
+    }
+  })
 }
+type Params = InferGetStaticParamsType<typeof getStaticPaths>
+const { slug } = Astro.params as Params
 
-const { title,author, shortDescription, longDescription, learningPathway, examStudyGuide, details } = Astro.props;
-
+const exam = await getExam(slug)
 ---
 
-<h1>{title}</h1>
+<head>
+  <link
+    rel='stylesheet'
+    href='https://skilljar-astro.vercel.app/styles/main.css'
+  /></head
+>
+<body>
+  <h1>{exam.title}</h1>
+  <div class='wrapper'>
+    <p>{exam.shortDescription}</p>
+    <p>{exam.longDescription}</p>
+  </div>
+  <div>
+    <h2>Details</h2>
+    <div></div>
+  </div>
+</body>
 
-<PortableText portableText={author} />
-<PortableText portableText={longDescription} />
-<PortableText portableText={learningPathway} />
-<PortableText portableText={examStudyGuide} />
-<PortableText portableText={details} />
-
-
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

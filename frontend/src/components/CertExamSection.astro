@@ -1,0 +1,49 @@
+---
+import type { CertificationExam } from '../sanity/sanity'
+import { getExamViaID } from '../sanity/sanity'
+import ExamCard from '../components/ExamCard.astro'
+
+interface Props {
+  heading: string
+  pageExams: CertificationExam[]
+}
+const { pageExams, heading } = Astro.props
+let exams: CertificationExam[] = []
+let isDataFetched = false
+
+async function fetchExams() {
+  for (let exam of pageExams) {
+    const fetchedExam = await getExamViaID(exam._ref)
+    exams.push(fetchedExam)
+  }
+  isDataFetched = true
+}
+
+await fetchExams()
+---
+
+<>
+  <h2>{heading}</h2>
+  <p>Exams</p>
+  <div>
+    {
+      exams.map((exam) => (
+        <ExamCard
+          name={exam.title}
+          url={exam.slug.current}
+        />
+      ))
+    }
+  </div>
+</>
+
+<style>
+  div {
+    display: flex;
+    gap: var(--space-sm);
+    flex-direction: column;
+    width: fit-content;
+    padding: var(--space-sm);
+    border: 1px solid black;
+  }
+</style>
