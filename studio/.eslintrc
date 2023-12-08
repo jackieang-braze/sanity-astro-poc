@@ -1,3 +1,4 @@
 {
+  "parser": "babel-eslint",
   "extends": "@sanity/eslint-config-studio"
 }

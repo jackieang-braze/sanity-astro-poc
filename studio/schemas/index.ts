@@ -1,19 +1,17 @@
-import blockContent from './blockContent'
-import category from './category'
-import post from './post'
-import author from './author'
-import certificationExam from './certificationExam'
-import examDetails from './examDetails'
-import language from './language'
-import learningPathway from './learningPathway'
+import hero from './documents/hero'
+import blockContent from './documents/blockContent'
+import certificationExam from './documents/certificationExam'
+import examDetails from './documents/examDetails'
+import language from './documents/language'
+import learningPathway from './documents/learningPathway'
+import page from './documents/page'
 
 export const schemaTypes = [
-  post,
-  author,
-  category,
   blockContent,
   certificationExam,
   examDetails,
   language,
   learningPathway,
+  hero,
+  page,
 ]

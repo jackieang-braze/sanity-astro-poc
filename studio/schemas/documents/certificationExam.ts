@@ -22,12 +22,12 @@ export default defineType({
     defineField({
       name: 'shortDescription',
       title: 'Short Description',
-      type: 'string',
+      type: 'text',
     }),
     defineField({
       name: 'longDescription',
       title: 'Long Description',
-      type: 'text',
+      type: 'blockContent',
     }),
     defineField({
       name: 'learningPathway',
@@ -49,4 +49,17 @@ export default defineType({
       },
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      shortDescription: 'shortDescription',
+    },
+    prepare(selection) {
+      const {title, shortDescription} = selection
+      return {
+        ...selection,
+        shortDescription: shortDescription,
+      }
+    },
+  },
 })
