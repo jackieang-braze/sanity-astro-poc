@@ -39,13 +39,15 @@ export interface CertificationExam {
   _ref: string
   title: string
   slug: Slug
-  shortDescription: PortableTextBlock[]
+  shortDescription: string
   longDescription: PortableTextBlock[]
   details: ExamDetails
 }
 
 export interface ExamDetails {
   _type: 'examDetails'
+  examLevel: 1 | 2 | 3 | 4
+  examFormat: string
   examDuration: number
   examNumberOfQuestions: number
   examFormat: string

@@ -11,6 +11,12 @@ export default defineType({
       type: 'number',
     }),
     defineField({
+      name: 'examLevel',
+      title: 'Exam Level',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(1).max(4),
+    }),
+    defineField({
       name: 'examNumberOfQuestions',
       title: 'Number of Questions',
       type: 'number',
