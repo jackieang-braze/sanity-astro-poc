@@ -1,8 +1,9 @@
 ---
-import { getPages } from '../sanity/sanity'
+import { getPages, getDrafts } from '../sanity/sanity'
 import '../styles/main.css'
 
 const pages = await getPages()
+const drafts = await getDrafts()
 ---
 
 <!doctype html>
@@ -43,6 +44,16 @@ const pages = await getPages()
         <ul>
           {pages.map((page) => (
             <li><a href=`page/${page.slug.current}`>{page.title}</a></li>
+          ))}
+        </ul>
+      )
+    }
+    <h1>Drafts</h1>
+    {
+      drafts && (
+        <ul>
+          {drafts.map((draft) => (
+            <li><a href=`page/${draft.slug.current}`>{draft.title}</a></li>
           ))}
         </ul>
       )

@@ -2,6 +2,7 @@ import { sanityClient } from 'sanity:client'
 import type { PortableTextBlock, ImageAsset, Slug } from 'sanity'
 import groq from 'groq'
 
+//THE REST
 export async function getExams(): Promise<CertificationExam[]> {
   return await sanityClient.fetch(
     groq`*[_type == "certificationExam" && defined(slug.current) ]`
@@ -11,6 +12,11 @@ export async function getExams(): Promise<CertificationExam[]> {
 export async function getPages(): Promise<Page[]> {
   return await sanityClient.fetch(
     groq`*[_type == "page" && defined(slug.current) ]`
+  )
+}
+export async function getDrafts(): Promise<Page[]> {
+  return await sanityClient.fetch(
+    groq`*[_type == "page" && defined(slug.current) && _id in path("drafts.**") ]`
   )
 }
 export async function getPage(slug: string): Promise<Page> {
@@ -50,7 +56,6 @@ export interface ExamDetails {
   examFormat: string
   examDuration: number
   examNumberOfQuestions: number
-  examFormat: string
   examPassingScore: number
   examPrice: number
 }

@@ -2,7 +2,6 @@
 import type { CertificationExam } from '../sanity/sanity'
 import { getExamViaID } from '../sanity/sanity'
 import CertExamCard from './CertExamCard.astro'
-import PortableText from './PortableText.astro'
 
 interface Props {
   heading: string
@@ -32,7 +31,7 @@ await fetchExams()
         <>
           <CertExamCard
             name={exam.title}
-            url={exam.slug.current}
+            url={`certification/${exam.slug.current}`}
             shortDescription={exam.shortDescription}
             longDescription={exam.longDescription}
           />

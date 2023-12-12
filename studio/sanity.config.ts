@@ -7,9 +7,9 @@ import {myStructure, pageStructure} from './deskStructure'
 export default defineConfig({
   name: 'default',
   title: 'Braze Learning Astro',
-
   projectId: 'n4p67ir2',
   dataset: 'production',
+  perspective: 'previewDrafts',
 
   plugins: [
     deskTool({
@@ -23,7 +23,10 @@ export default defineConfig({
       structure: pageStructure,
     }),
 
-    visionTool(),
+    visionTool({
+      defaultApiVersion: 'v2021-03-25',
+      defaultDataset: 'production',
+    }),
   ],
 
   schema: {
