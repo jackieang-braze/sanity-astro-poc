@@ -29,9 +29,10 @@ await fetchExams()
     {
       exams.map((exam) => (
         <>
+          <p>certification/{exam.slug.current}</p>
           <CertExamCard
             name={exam.title}
-            url={`certification/${exam.slug.current}`}
+            url={`/${exam.slug.current}`}
             shortDescription={exam.shortDescription}
             longDescription={exam.longDescription}
           />

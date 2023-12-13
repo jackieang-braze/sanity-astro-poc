@@ -1,6 +1,7 @@
 import { sanityIntegration } from '@sanity/astro';
 import { defineConfig } from "astro/config";
-import {loadEnv} from 'astro/env';
+import { READ_TOKEN } from './src/sanity/api';
+
 // https://astro.build/config
 export default defineConfig({
    build: {
@@ -11,8 +12,8 @@ export default defineConfig({
       projectId: "n4p67ir2",
       dataset: "production",
       useCdn: false,
-      token: process.env.SANITY_API_READ_TOKEN, 
-      perspective: "previewDrafts",
+      token: import.meta.env.VITE_SANITY_API_READ_TOKEN,
+      perspective: "raw",
     }),
   ],
 });

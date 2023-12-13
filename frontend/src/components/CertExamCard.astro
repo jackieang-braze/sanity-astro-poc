@@ -1,7 +1,7 @@
 ---
 import Link from './Link.astro'
 import PortableText from './PortableText.astro'
-import type { PortableTextBlock } from 'sanity-queries'
+import type { PortableTextBlock } from 'sanity'
 
 interface Props {
   name: string
@@ -21,6 +21,7 @@ const { name, url, shortDescription, longDescription } = Astro.props
   <h4>{name}</h4>
   <p>{shortDescription}</p>
   <PortableText portableText={longDescription} />
+  <a href={url}>Link Test</a>
   <Link
     href={url}
     variant='tertiary'

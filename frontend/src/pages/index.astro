@@ -1,8 +1,8 @@
 ---
-import { getPages, getDrafts } from '../sanity/sanity'
+import { getPublishedPages, getDrafts } from '../sanity/sanity'
 import '../styles/main.css'
 
-const pages = await getPages()
+const pages = await getPublishedPages()
 const drafts = await getDrafts()
 ---
 
@@ -38,7 +38,7 @@ const drafts = await getDrafts()
     />
   </head>
   <body>
-    <h1>Pages</h1>
+    <h2>Published Pages</h2>
     {
       pages && (
         <ul>
