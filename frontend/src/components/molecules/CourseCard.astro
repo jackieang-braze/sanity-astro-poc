@@ -1,0 +1,99 @@
+---
+import Heading from '@components/atoms/Heading.astro'
+import Text from '@components/atoms/Text.astro'
+import Link from '@components/atoms/Link.astro'
+import CertificationDetails from '@components/atoms/CertificationDetails.astro'
+import CertBadge from '@components/branding/CertBadge.astro'
+import type { ExamTag } from 'bl-astro'
+
+interface Props {
+  type: 'certification'
+  title: string
+  shortDescription: string
+  ctaText?: 'Learn More ->'
+  ctaHref?: string
+  badgeTag?: ExamTag
+
+  format?: string
+  passingScore?: number
+  level?: number
+  durationMinutes?: number
+  priceUSD?: number
+}
+const {
+  type,
+  title,
+  shortDescription,
+  ctaText = 'Learn More',
+  ctaHref,
+  badgeTag="practitioner",
+  level = 1,
+  durationMinutes = 0,
+  priceUSD = 0,
+} = Astro.props
+---
+
+<div data-comp-course-card>
+  {type==="certification" && <CertBadge badgeTag={badgeTag} alt=`${title} badge}` width="100px" />}
+  <Heading size="h3">{title}</Heading>
+  <div class="description">
+    <Text size="md">{shortDescription}</Text>
+  </div>
+    <Link variant="tertiary" href={ctaHref} arrow>{ctaText}</Link>
+
+  <div class="details-wrapper">
+    {
+      type === 'certification' && (
+        <CertificationDetails
+          level={level}
+          durationMinutes={durationMinutes}
+          priceUSD={priceUSD}
+        />
+      )
+    }
+  </div>
+</div>
+
+<style>
+  [data-comp-course-card] {
+    display: flex;
+    width: var(--width-course-card);
+    height: 100%;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-sm) var(--space-xs);
+    justify-content: space-around;
+    border-radius: 1.25rem;
+    border: 2px solid var(--color-gray-200, #d8dcde);
+    background: #fff;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-8dp);
+  }
+
+  [data-comp-course-card]:hover{
+    box-shadow: var(--shadow-12dp);
+    transform: translateY(-1.2px);
+
+  }
+  [data-comp-course-card]:active {
+    box-shadow: var(--shadow-4dp);
+    transform: scale(0.99);  
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .details-wrapper {
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--color-gray-300);
+    position: relative;
+    bottom: 1px;
+  }
+  .level, .duration, .price {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+</style>

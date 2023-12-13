@@ -1,0 +1,78 @@
+---
+import Image from '@components/atoms/Image.astro'
+import Text from '@components/atoms/Text.astro'
+import Heading from '@components/atoms/Heading.astro'
+import Link from '@components/atoms/Link.astro'
+
+interface Props {
+  imgSrc: string
+  imgAlt?: string
+  imgWidth?: string
+  title: string
+  description: string
+  cta?: string
+  href: string
+}
+const {
+  imgSrc = 'https://placehold.jp/100x100.png',
+  title,
+  imgAlt = `Icon for ${title}`,
+  imgWidth = '100px',
+  description,
+  cta = 'Learn More ->',
+  href = '#',
+} = Astro.props
+---
+
+<div data-comp-featurestack class="featurestack-wrapper">
+  <div class="featurestack-content">
+    <Image src={imgSrc} alt={imgAlt} width={imgWidth} />
+    <div class="featurestack-text">
+      <Heading size="h3">
+        {title}
+      </Heading>
+      <Text size="md">{description}</Text>
+      <Link variant="tertiary" href={href} arrow>
+        {cta}
+      </Link>
+    </div>
+  </div>
+
+  <style>
+    .featurestack-wrapper {
+      width: 100%;
+      container-type: inline-size;
+      container-name: featurestackWrapper;
+    }
+    .featurestack-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .fa-solid {
+      font-size: inherit;
+      line-height: inherit;
+    }
+    .featurestack-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    @container featurestackWrapper (width > 70vw) and (width >= 400px) {
+      .featurestack-content {
+        flex-direction: row;
+        gap: 4rem;
+      }
+    }
+    @container featurestackWrapper (width > 60vw) and (width < 400px) {
+      .featurestack-content {
+        align-items: center;
+      }
+      .featurestack-text {
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</div>

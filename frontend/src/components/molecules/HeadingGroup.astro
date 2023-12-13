@@ -1,0 +1,28 @@
+---
+import Heading from '@components/atoms/Heading.astro'
+import Text from '@components/atoms/Text.astro'
+import type { HeadingSize, TshirtSize } from 'bl-astro'
+interface Props {
+  size: HeadingSize
+  heading: string
+  subheading: string
+  hasDivider?: boolean
+  color?: 'white' | 'black'
+}
+const { size, heading, subheading, hasDivider = false, color = 'black' } = Astro.props
+const textSize = size === 'h1' ? 'lg' : 'h2' ? 'md' : 'h3' ? 'sm' : 'h4' ? 'xs' : 'xl'
+---
+
+<div data-comp-heading-group class={size}>
+  <Heading size={size} hasDivider={hasDivider} color={color}>{heading}</Heading>
+  <Text size={textSize}>{subheading}</Text>
+</div>
+
+<style define:vars={{ space: `var(--space-${textSize})` }}>
+  [data-comp-heading-group] {
+    margin-bottom: var(--space);
+  }
+  [data-comp-heading-group]:not:first-child && :not:last-child {
+    margin-top: var(--space);
+  }
+</style>

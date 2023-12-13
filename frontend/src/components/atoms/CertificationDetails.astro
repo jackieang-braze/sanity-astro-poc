@@ -1,0 +1,48 @@
+---
+import Text from './Text.astro'
+interface Props {
+  level: number
+  durationMinutes: number
+  priceUSD: number
+}
+const { level, durationMinutes, priceUSD } = Astro.props
+const formattedTime =
+  durationMinutes > 90
+    ? `${Math.floor(durationMinutes / 60)}hr ${durationMinutes % 60}min`
+    : `${durationMinutes}min`
+---
+
+<div data-comp-cert-details>
+  <div class="item">
+    <span class="material-symbols-outlined"> mountain_flag</span><Text size="xs">
+      Level {level}
+    </Text>
+  </div>
+  <div class="item">
+    <span class="material-symbols-outlined"> schedule</span><Text size="xs">
+      {formattedTime}
+    </Text>
+  </div>
+  <div class="item">
+    <span class="material-symbols-outlined"> sell</span><Text size="xs">${priceUSD} USD</Text>
+  </div>
+</div>
+
+<style>
+  div[data-comp-cert-details] {
+    display: flex;
+    flex-direction: row;
+    gap: 0.88rem;
+  }
+  .item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+  .item span {
+    font-size: 1.1rem;
+    color: var(--color-gray-800);
+    position: relative;
+    bottom: -3px;
+  }
+</style>

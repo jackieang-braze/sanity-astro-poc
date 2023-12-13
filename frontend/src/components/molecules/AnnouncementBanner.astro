@@ -1,0 +1,73 @@
+---
+import Flex from '@components/atoms/Flex.astro'
+import Heading from '@components/atoms/Heading.astro'
+import Text from '@components/atoms/Text.astro'
+import Link from '@components/atoms/Link.astro'
+import StatusFlag from '@components/atoms/StatusFlag.astro'
+interface Props {
+  bgColor?: string
+  bgImg?: 'calendar' | 'directory' | 'certification-squiggle'
+  heading: string
+  subheading: string
+  cta?: string
+  linkVariant?: 'primary' | 'secondary' | 'tertiary'
+  url?: string
+  status?: 'New!'
+  overrideText?: string
+}
+const {
+  bgColor = 'blue-50',
+  bgImg,
+  heading,
+  subheading,
+  cta,
+  linkVariant = 'primary',
+  url = 'https://learning.braze.com/',
+  status,
+  overrideText,
+} = Astro.props
+---
+
+<div data-comp-announcement-banner>
+  <div class=`img-wrapper ${bgImg}`>
+    <Flex direction="column" gap="var(--space-sm)">
+      {status && <StatusFlag status={status} overrideText={overrideText} />}
+      <div class="text">
+        <Heading size="h2">{heading}</Heading>
+        <Text size="md">{subheading}</Text>
+      </div>
+      {
+        cta && (
+          <Link variant={linkVariant} href={url} arrow>
+            {cta}
+          </Link>
+        )
+      }
+    </Flex>
+  </div>
+</div>
+
+<style define:vars={{ 'bg-color': `var(--color-${bgColor})`, 'bg-img': `var(--svg-${bgImg})` }}>
+  [data-comp-announcement-banner] {
+    background-color: var(--bg-color);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    container: bannerWrapper / inline-size;
+  }
+
+  .img-wrapper {
+    width: 100%;
+    background: var(--bg-img) no-repeat right;
+    padding: var(--space-md);
+  }
+  .directory {
+    background-position: top -0.5rem right 4rem;
+    background-size: 16.25rem;
+  }
+
+  @container bannerWrapper (width < 800px) {
+    .img-wrapper {
+      background: none;
+    }
+  }
+</style>

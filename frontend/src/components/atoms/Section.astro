@@ -1,0 +1,28 @@
+---
+interface Props {
+  bg?:
+    | 'gray-50'
+    | 'white'
+    | 'blue-300'
+    | 'dark-blue-300'
+    | 'blue-fuchsia-gradient'
+    | 'blue-50'
+    | 'blue-800'
+  paddingY?: 'sm' | 'md' | 'lg'
+}
+const { paddingY = 'sm', bg = 'white' } = Astro.props
+const paddingYDirective = `var(--space-${paddingY})`
+const bgDirective =
+  bg === 'blue-fuchsia-gradient' ? 'var(--grad-blue-to-fuchsia)' : `var(--color-${bg})`
+---
+
+<section data-comp-section>
+  <slot />
+</section>
+
+<style define:vars={{ 'padding-y': paddingYDirective, bg: bgDirective }}>
+  [data-comp-section] {
+    background: var(--bg);
+    padding-block: clamp(1rem, 10vw, var(--padding-y));
+  }
+</style>

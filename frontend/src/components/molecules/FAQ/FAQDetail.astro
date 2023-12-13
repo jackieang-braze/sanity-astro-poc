@@ -1,0 +1,59 @@
+---
+interface Props {
+  summary: string
+  body: string
+}
+const { summary, body } = Astro.props
+---
+
+<details>
+  <summary>
+    {summary}
+    <span class="chevron-down material-symbols-outlined"> expand_more</span>
+  </summary>
+  <Fragment set:html={body} />
+
+  <style>
+    details {
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--color-gray-50);
+      border-radius: var(--radius-sm);
+      font-weight: var(--font-size-md);
+    }
+    summary {
+      cursor: pointer;
+      position: relative;
+      display: block;
+      padding-right: 4rem;
+      color: var(--color-gray-900);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+      transition: 0.3s transform ease;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    details[open] {
+      background-color: var(--color-teal-50);
+    }
+
+    details[open] summary {
+      font-weight: 600;
+      padding-bottom: 1rem;
+    }
+    details[open] .material-symbols-outlined {
+      transform: rotate(180deg);
+      transition: 0.3s transform ease;
+    }
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+</details>

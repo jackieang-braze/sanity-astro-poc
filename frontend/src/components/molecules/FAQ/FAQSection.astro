@@ -1,0 +1,15 @@
+---
+import Flex from '@components/atoms/Flex.astro'
+import Heading from '@components/atoms/Heading.astro'
+interface Props {
+  heading: string
+}
+const { heading } = Astro.props
+---
+
+<Flex gap="22px">
+  <Heading size="h3">{heading}</Heading>
+  <Flex gap="2px">
+    <slot />
+  </Flex>
+</Flex>

@@ -1,0 +1,16 @@
+{
+  "name": "sanity-astro-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sanity-astro-poc": "link:",
+    "turbo": "^1.11.2"
+  }
+}

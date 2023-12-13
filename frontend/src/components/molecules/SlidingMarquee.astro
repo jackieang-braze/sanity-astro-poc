@@ -1,0 +1,65 @@
+---
+import Image from '@components/atoms/Image.astro'
+interface Props {
+  direction?: 'right' | 'left'
+  delay?: number
+  gap?: string
+  duration?: number
+}
+const { direction = 'right', delay = 0, gap = '0', duration = 50 } = Astro.props
+const scrollStart = direction === 'left' ? '0' : 'calc(-100% - (var(--gap)))'
+const scrollEnd = direction === 'left' ? 'calc(-100% - (var(--gap)))' : '0'
+---
+
+<div class="wrapper">
+  <div class="sliding-marquee">
+    <div class="marquee-group">
+      <slot />
+    </div>
+    <div aria-hidden="true" class="marquee-group">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style
+  define:vars={{
+    gap: `${gap}px`,
+    duration: `${duration}s`,
+    scrollstart: `${scrollStart}`,
+    scrollend: `${scrollEnd}`,
+    delay: `${delay}s`,
+  }}
+>
+  .sliding-marquee {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: var(--gap);
+    -webkit-mask-image: linear-gradient(90deg, transparent, white, white, transparent);
+  }
+  .marquee-group {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: var(--gap);
+    min-width: 100%;
+    animation: scroll-x var(--duration) linear infinite;
+    animation-delay: var(--delay);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-group {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes scroll-x {
+    from {
+      transform: translateX(var(--scrollstart));
+    }
+    to {
+      transform: translateX(var(--scrollend));
+    }
+  }
+</style>

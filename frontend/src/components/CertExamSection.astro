@@ -2,6 +2,7 @@
 import type { CertificationExam } from '../sanity/sanity'
 import { getExamViaID } from '../sanity/sanity'
 import CertExamCard from './CertExamCard.astro'
+import CourseCard from '@components/molecules/CourseCard.astro'
 
 interface Props {
   heading: string
@@ -30,11 +31,11 @@ await fetchExams()
       exams.map((exam) => (
         <>
           <p>certification/{exam.slug.current}</p>
-          <CertExamCard
-            name={exam.title}
-            url={`/${exam.slug.current}`}
+          <CourseCard
+            type='certification'
+            title={exam.title}
+            ctaHref={`/${exam.slug.current}`}
             shortDescription={exam.shortDescription}
-            longDescription={exam.longDescription}
           />
         </>
       ))

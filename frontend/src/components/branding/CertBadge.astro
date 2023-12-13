@@ -1,0 +1,26 @@
+---
+import type { ExamTag } from 'bl-astro'
+import Image from '../atoms/Image.astro'
+interface Props {
+  badgeTag: ExamTag
+  width?: string
+  alt: string
+}
+const { badgeTag, width = '100px', alt } = Astro.props
+const url =
+  badgeTag === 'practitioner'
+    ? 'https://cdn.sanity.io/images/b7pblshe/production/cd2357eb4d23e49c334f4eec696af5168e77fe13-1080x1080.svg'
+    : badgeTag === 'marketer'
+    ? 'https://cdn.sanity.io/images/b7pblshe/production/f93d83e9d39f33b7151405af007449fb87ba6017-1080x1080.svg'
+    : badgeTag === 'ios'
+    ? 'https://cdn.sanity.io/images/b7pblshe/production/95c9303c151f59b8b22a6d22596d7ca37274ed3c-1080x1080.svg'
+    : badgeTag === 'android'
+    ? 'https://cdn.sanity.io/images/b7pblshe/production/1e391d5d5ddad30aabd8254f4e61226ddf4fbfe5-1080x1080.svg'
+    : badgeTag === 'web'
+    ? 'https://cdn.sanity.io/images/b7pblshe/production/40691d374be729d86e688faf70b4605b760bba86-1080x1080.svg'
+    : badgeTag === 'digital-strategist'
+    ? 'https://cdn.sanity.io/images/b7pblshe/production/dcf28734b00c20528071df72494b54f9facfd8f5-1080x1080.svg'
+    : ''
+---
+
+<Image width={width} src={url} alt={alt} />

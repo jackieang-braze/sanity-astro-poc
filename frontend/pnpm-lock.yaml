@@ -35,6 +35,9 @@ dependencies:
   astro-portabletext:
     specifier: ^0.9.6
     version: 0.9.6
+  bl-astro:
+    specifier: 'link:'
+    version: 'link:'
   groq:
     specifier: ^3.21.0
     version: 3.21.0

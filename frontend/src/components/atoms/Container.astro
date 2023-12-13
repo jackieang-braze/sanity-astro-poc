@@ -1,0 +1,39 @@
+---
+import type { TshirtSize } from 'bl-astro'
+
+interface Props {
+  width?: TshirtSize
+  marginY?:
+    | TshirtSize
+    | [TshirtSize, TshirtSize]
+    | [TshirtSize, 0]
+    | [0, TshirtSize]
+}
+const { width, marginY = 0 } = Astro.props
+const widthDirective = width ? `var(--width-body-${width})` : '100%'
+const marginTopDirective = Array.isArray(marginY)
+  ? `var(--space-${marginY[0]})`
+  : `var(--space-${marginY})`
+const marginBottomDirective = Array.isArray(marginY)
+  ? `var(--space-${marginY[1]})`
+  : `var(--space-${marginY})`
+---
+
+<div data-comp-container>
+  <slot />
+</div>
+
+<style
+  define:vars={{
+    width: widthDirective,
+    'margin-top': marginTopDirective,
+    'margin-bottom': marginBottomDirective,
+  }}
+>
+  [data-comp-container] {
+    margin-inline: auto;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    width: var(--width);
+  }
+</style>

@@ -1,6 +1,5 @@
 import { sanityIntegration } from '@sanity/astro';
 import { defineConfig } from "astro/config";
-import { READ_TOKEN } from './src/sanity/api';
 
 // https://astro.build/config
 export default defineConfig({
