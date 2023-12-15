@@ -20,10 +20,15 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'content',
-      title: 'Content',
+      name: 'modules',
+      title: 'Modules',
       type: 'array',
-      of: [{type: 'reference', name: 'certificationExam', to: [{type: 'certificationExam'}]}],
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'hero'}, {type: 'announcementBanner'}, {type: 'courseSection'}],
+        },
+      ],
     }),
   ],
 })

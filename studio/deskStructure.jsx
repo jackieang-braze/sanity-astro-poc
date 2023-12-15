@@ -22,5 +22,6 @@ export const pageStructure = (S) =>
     .items([
       S.listItem()
         .title('Pages')
-        .child(S.documentTypeList('page'))
+        .child(S.documentTypeList('page')),
+      
     ])

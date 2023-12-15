@@ -6,6 +6,11 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
@@ -16,9 +21,22 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'squiggle',
-      title: 'Squiggle',
-      type: 'string',
+      name: 'cta',
+      title: 'CTA 1',
+      type: 'reference',
+      to: [{type: 'cta'}],
     }),
+    defineField({
+      name: 'cta2',
+      title: 'CTA 2',
+      type: 'reference',
+      to: [{type: 'cta'}],
+    }),
+
+    // defineField({
+    //   name: 'heroImage',
+    //   title: 'Hero Image',
+    //   type: 'string',
+    // }),
   ],
 })
