@@ -1,36 +1,31 @@
 ---
-import type { CertificationExam } from '../sanity/sanity'
-import { getExamViaID } from '../sanity/sanity'
-import CertExamCard from './CertExamCard.astro'
+import type { CertificationExam } from '@lib/sanity'
+import { getExamViaID } from '@lib/sanity'
 import CourseCard from '@components/molecules/CourseCard.astro'
-
+import CourseCardGrid from '@components/molecules/CourseCardGrid.astro'
+import Heading from './atoms/Heading.astro'
+import Text from './atoms/Text.astro'
+import Container from './atoms/Container.astro'
+import HeadingGroup from './molecules/HeadingGroup.astro'
 interface Props {
   heading: string
+  subheading: string
   pageExams: CertificationExam[]
 }
-const { pageExams, heading } = Astro.props
-let exams: CertificationExam[] = []
-let isDataFetched = false
-
-async function fetchExams() {
-  for (let exam of pageExams) {
-    const fetchedExam = await getExamViaID(exam._ref)
-    exams.push(fetchedExam)
-  }
-  isDataFetched = true
-}
-
-await fetchExams()
+const { pageExams, heading, subheading } = Astro.props
 ---
 
-<>
-  <h2>{heading}</h2>
-  <p>Exams</p>
-  <div>
+<Container width='md'>
+  <HeadingGroup
+    size='h2'
+    heading={heading}
+    subheading={subheading}
+  />
+
+  <CourseCardGrid>
     {
-      exams.map((exam) => (
+      pageExams.map((exam) => (
         <>
-          <p>certification/{exam.slug.current}</p>
           <CourseCard
             type='certification'
             title={exam.title}
@@ -40,8 +35,8 @@ await fetchExams()
         </>
       ))
     }
-  </div>
-</>
+  </CourseCardGrid>
+</Container>
 
 <style>
   div {

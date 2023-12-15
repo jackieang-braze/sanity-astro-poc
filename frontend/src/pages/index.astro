@@ -1,53 +1,23 @@
 ---
-import { getPublishedPages, getDrafts } from '../sanity/sanity'
+import { getPublishedPages, getDrafts } from '@lib/sanity'
 import '../styles/main.css'
+import BareLayout from '@layouts/BareLayout.astro'
 
 const pages = await getPublishedPages()
 const drafts = await getDrafts()
 ---
 
-<!doctype html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <link
-      rel='icon'
-      type='image/svg+xml'
-      href='/favicon.svg'
-    />
-    <meta
-      name='viewport'
-      content='width=device-width'
-    />
-    <meta
-      name='generator'
-      content={Astro.generator}
-    />
-    <title>Sanity Astro POC</title>
-    <link
-      rel='stylesheet'
-      href='https://skilljar-astro.vercel.app/styles/main.css'
-    />
-    <link
-      rel='stylesheet'
-      href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'
-    />
-    <link
-      rel='stylesheet'
-      href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200'
-    />
-  </head>
-  <body>
+<BareLayout>
     <h2>Published Pages</h2>
-    {
-      pages && (
+    {pages && (
         <ul>
           {pages.map((page) => (
             <li><a href=`page/${page.slug.current}`>{page.title}</a></li>
           ))}
         </ul>
-      )
-    }
+      )}
+      
+    
     <h1>Drafts</h1>
     {
       drafts && (
@@ -58,5 +28,4 @@ const drafts = await getDrafts()
         </ul>
       )
     }
-  </body>
-</html>
+</BareLayout>

@@ -10,7 +10,7 @@ export async function getExams(): Promise<CertificationExam[]> {
 
 export async function getPages(): Promise<Page[]> {
   return await sanityClient.fetch(
-    groq`*[_type == "page" && defined(slug.current) ]`
+    groq`*[_type == "page" && defined(slug.current)]`
   )
 }
 export async function getPublishedPages(): Promise<Page[]> {
@@ -26,10 +26,15 @@ export async function getDrafts(): Promise<Page[]> {
 }
 export async function getPage(slug: string): Promise<Page> {
   return await sanityClient.fetch(
-    groq`*[_type == "page" && slug.current == $slug][0]`,
+    groq`*[_type == "page" && defined(slug.current) && slug.current == $slug][0]`,
     { slug }
   )
 }
+
+export async function getModuleViaID<T>(id: string): Promise<T> {
+  return await sanityClient.fetch(groq`*[_id == $id][0]`, { id })
+}
+
 export async function getExam(slug: string): Promise<CertificationExam> {
   return await sanityClient.fetch(
     groq`*[_type == "certificationExam" && slug.current == $slug][0]`,
@@ -71,13 +76,60 @@ export interface Page {
   _updatedAt: string
   slug: Slug
   title: string
-  content: CertificationExam[]
+  modules: ModuleTypes[]
+}
+
+export interface ModuleTypes {
+  hero: Hero
+  announcementBanner: AnnouncementBanner
+  courseSection: CourseSection
+  cta: CTA
+}
+
+export interface ModuleReference {
+  _type: keyof ModuleTypes
+  _rev: string
+  _id: string
+  _ref: string
 }
 
 export interface Hero {
   _type: 'hero'
-  _createdAt: string
-  _updatedAt: string
-  heading: string
-  subheading: ImageAsset
+  _rev: string
+  _id: string
+  _ref: string
+  title: string
+  subtitle: string
+  image: ImageAsset
+  cta: ModuleReference
+}
+export interface AnnouncementBanner {
+  _type: 'announcementBanner'
+  _rev: string
+  _id: string
+  _ref: string
+  title: string
+  subtitle: string
+  cta: ModuleReference
+}
+export interface CourseSection {
+  _type: 'courseSection'
+  _rev: string
+  _id: string
+  _ref: string
+  title: string
+  subtitle: string
+  cta: ModuleReference
+}
+export interface CTA {
+  _type: 'cta'
+  _rev: string
+  _id: string
+  _ref: string
+  title: string
+  link: 'external' | 'internal' | 'target'
+  externalLink: string
+  internalLink: ModuleReference
+  targetLink: string
+  showArrow: boolean
 }

@@ -1,8 +1,13 @@
 ---
-import { getPages, getPage } from '../../sanity/sanity'
+import BareLayout from '../../layouts/BareLayout.astro'
+import { getPages, getPage, getModuleViaID } from '@lib/sanity'
 import type { InferGetStaticParamsType } from 'astro'
-import CertExamSection from '../../components/CertExamSection.astro'
-import '../../styles/main.css'
+import type { ModuleReference } from '@lib/sanity'
+import Text from '@components/atoms/Text.astro'
+import Container from '@components/atoms/Container.astro'
+import SquiggleSection from '@components/molecules/SquiggleSection.astro'
+import Heading from '@components/atoms/Heading.astro'
+import AnnouncementBanner from '@components/molecules/AnnouncementBanner.astro'
 
 export async function getStaticPaths() {
   const pages = await getPages()
@@ -17,20 +22,51 @@ export async function getStaticPaths() {
 }
 type Params = InferGetStaticParamsType<typeof getStaticPaths>
 const { slug } = Astro.params as Params
-
+let modules: ModuleReference[] = []
 const page = await getPage(slug)
+
+async function fetchModules() {
+  for (let item of page.modules) {
+    modules.push(await getModuleViaID(item._ref))
+  }
+}
+await fetchModules()
 ---
 
-<head>
-  <link
-    rel='stylesheet'
-    href='https://skilljar-astro.vercel.app/styles/main.css'
-  /></head
->
-<>
-  <h1>{page.title}</h1>
-  <CertExamSection
-    heading='Dashboard Exams'
-    pageExams={page.content}
-  />
-</>
+<BareLayout>
+  <Container>
+    {
+      modules.map((item) => {
+        switch (item._type) {
+          case 'hero':
+            return (
+              <SquiggleSection bgImage='certification-squiggle'>
+                <Text weight={600}>{item.eyebrow}</Text>
+                <Heading size='h2'>{item.heading}</Heading>
+                <Text>{item.subheading}</Text>
+              </SquiggleSection>
+            )
+          case 'announcementBanner':
+            return (
+              <Container width='sm'>
+                <AnnouncementBanner
+                  heading={item.heading}
+                  subheading={item.subheading}
+                  bgImg='directory'
+                  cta='Learn More'
+                  url={item.url}
+                  linkVariant='tertiary'
+                />
+              </Container>
+            )
+          case 'courseSection':
+            return <Heading size='h2'>{item._type}</Heading>
+          default:
+            return (
+              <Heading size='h2'>here: {JSON.stringify(item._type)}</Heading>
+            )
+        }
+      })
+    }
+  </Container>
+</BareLayout>

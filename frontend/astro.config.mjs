@@ -12,7 +12,7 @@ export default defineConfig({
       dataset: "production",
       useCdn: false,
       token: import.meta.env.VITE_SANITY_API_READ_TOKEN,
-      perspective: "raw",
+      perspective: "previewDrafts",
     }),
   ],
 });

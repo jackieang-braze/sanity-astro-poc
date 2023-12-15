@@ -1,7 +1,7 @@
 ---
-import { getExam, getExams } from '../../sanity/sanity.ts'
+import { getExam, getExams } from '@lib/sanity'
 import type { InferGetStaticParamsType } from 'astro'
-import '../../styles/main.css'
+import BareLayout from '@layouts/BareLayout.astro'
 
 export async function getStaticPaths() {
   const exams = await getExams()
@@ -20,13 +20,7 @@ const { slug } = Astro.params as Params
 const exam = await getExam(slug)
 ---
 
-<head>
-  <link
-    rel='stylesheet'
-    href='https://skilljar-astro.vercel.app/styles/main.css'
-  /></head
->
-<body>
+<BareLayout>
   <h1>{exam.title}</h1>
   <div class='wrapper'>
     <p>{exam.shortDescription}</p>
@@ -36,7 +30,7 @@ const exam = await getExam(slug)
     <h2>Details</h2>
     <div></div>
   </div>
-</body>
+</BareLayout>
 
 <style>
   div {
