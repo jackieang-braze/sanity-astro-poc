@@ -8,9 +8,6 @@ export const myStructure = (S) =>
         .title('Certification Exams')
         .child(S.documentTypeList('certificationExam')),
       S.listItem()
-        .title('Languages')
-        .child(S.documentTypeList('language')),
-      S.listItem()
         .title('Learning Paths')
         .child(S.documentTypeList('learningPathway')),
     ])

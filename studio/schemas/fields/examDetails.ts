@@ -3,7 +3,7 @@ import {defineField, defineType} from 'sanity'
 export default defineType({
   name: 'examDetails',
   title: 'Exam Details',
-  type: 'document',
+  type: 'object',
   fields: [
     defineField({
       name: 'examDuration',
@@ -25,12 +25,6 @@ export default defineType({
       name: 'examFormat',
       title: 'Exam Format',
       type: 'string',
-    }),
-    defineField({
-      name: 'examLanguage',
-      title: 'Exam Language',
-      type: 'reference',
-      to: [{type: 'language'}],
     }),
     defineField({
       name: 'examPassingScore',

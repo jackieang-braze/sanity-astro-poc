@@ -1,24 +1,33 @@
-import hero from './documents/hero'
-import blockContent from './documents/blockContent'
-import certificationExam from './documents/certificationExam'
-import examDetails from './documents/examDetails'
-import language from './documents/language'
-import learningPathway from './documents/learningPathway'
+// Documents
 import page from './documents/page'
-import heading from './documents/heading'
-import announcementBanner from './documents/announcementBanner'
-import courseSection from './documents/courseSection'
-import cta from './documents/cta'
+import certificationExam from './documents/certificationExam'
+import learningPathway from './documents/learningPathway'
+
+// Modules
+import hero from './modules/hero'
+import announcementBanner from './modules/announcementBanner'
+import courseSection from './modules/courseSection'
+
+// Other fields
+import heading from './fields/heading'
+import blockContent from './fields/blockContent'
+import examDetails from './fields/examDetails'
+import cta from './fields/cta'
+
 export const schemaTypes = [
-  blockContent,
-  certificationExam,
-  examDetails,
-  language,
-  learningPathway,
-  hero,
+  // Documents
   page,
-  heading,
+  certificationExam,
+  learningPathway,
+
+  // Modules
+  hero,
   announcementBanner,
+  blockContent,
   courseSection,
+
+  // Other fields
+  examDetails,
+  heading,
   cta,
 ]

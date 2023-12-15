@@ -20,6 +20,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'hero',
+      title: 'Hero',
+      type: 'hero'
+    }),
+    defineField({
       name: 'modules',
       title: 'Modules',
       type: 'array',
