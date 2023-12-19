@@ -6,13 +6,15 @@ import learningPathway from './documents/learningPathway'
 // Modules
 import hero from './modules/hero'
 import announcementBanner from './modules/announcementBanner'
-import courseSection from './modules/courseSection'
+import courseCardGrid from './modules/courseCardGrid'
+import courseCardSection from './modules/courseCardSection'
 
 // Other fields
 import heading from './fields/heading'
 import blockContent from './fields/blockContent'
 import examDetails from './fields/examDetails'
 import cta from './fields/cta'
+import headingGroup from './fields/headingGroup'
 
 export const schemaTypes = [
   // Documents
@@ -24,10 +26,12 @@ export const schemaTypes = [
   hero,
   announcementBanner,
   blockContent,
-  courseSection,
+  courseCardGrid,
+  courseCardSection,
 
   // Other fields
   examDetails,
   heading,
+  headingGroup,
   cta,
 ]

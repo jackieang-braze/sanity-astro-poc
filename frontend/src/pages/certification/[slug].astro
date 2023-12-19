@@ -4,15 +4,15 @@ import type { InferGetStaticParamsType } from 'astro'
 import BareLayout from '@layouts/BareLayout.astro'
 
 export async function getStaticPaths() {
-  const exams = await getExams()
+	const exams = await getExams()
 
-  return exams.map((exam) => {
-    return {
-      params: {
-        slug: exam.slug?.current || '',
-      },
-    }
-  })
+	return exams.map((exam) => {
+		return {
+			params: {
+				slug: exam.slug || ''
+			}
+		}
+	})
 }
 type Params = InferGetStaticParamsType<typeof getStaticPaths>
 const { slug } = Astro.params as Params
@@ -21,20 +21,20 @@ const exam = await getExam(slug)
 ---
 
 <BareLayout>
-  <h1>{exam.title}</h1>
-  <div class='wrapper'>
-    <p>{exam.shortDescription}</p>
-    <p>{exam.longDescription}</p>
-  </div>
-  <div>
-    <h2>Details</h2>
-    <div></div>
-  </div>
+	<h1>{exam.title}</h1>
+	<div class="wrapper">
+		<p>{exam.shortDescription}</p>
+		<p>{exam.longDescription}</p>
+	</div>
+	<div>
+		<h2>Details</h2>
+		<div></div>
+	</div>
 </BareLayout>
 
 <style>
-  div {
-    display: flex;
-    flex-direction: column;
-  }
+	div {
+		display: flex;
+		flex-direction: column;
+	}
 </style>

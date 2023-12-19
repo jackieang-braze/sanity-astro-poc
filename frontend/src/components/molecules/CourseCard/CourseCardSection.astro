@@ -1,0 +1,30 @@
+---
+import type { CertificationExam } from '@lib/sanity'
+import CourseCard from '@components/molecules/CourseCard/CourseCard.astro'
+import CourseCardGrid from '@components/molecules/CourseCard/CourseCardGrid.astro'
+import Container from '../../atoms/Container.astro'
+import HeadingGroup from '../HeadingGroup.astro'
+interface Props {
+	heading: string
+	subheading: string
+	pageExams: CertificationExam[]
+}
+const { pageExams, heading, subheading } = Astro.props
+---
+
+<Container width="md">
+	<HeadingGroup size="h2" heading={heading} subheading={subheading} />
+	<CourseCardGrid>
+	</CourseCardGrid>
+</Container>
+
+<style>
+	div {
+		display: flex;
+		gap: var(--space-sm);
+		flex-direction: column;
+		width: fit-content;
+		padding: var(--space-sm);
+		border: 1px solid black;
+	}
+</style>

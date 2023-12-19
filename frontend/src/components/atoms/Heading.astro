@@ -1,9 +1,9 @@
 ---
 import type { HeadingSize } from 'bl-astro'
 interface Props {
-  color?: 'white' | 'black'
-  hasDivider?: boolean
-  size: HeadingSize
+	color?: 'white' | 'black'
+	hasDivider?: boolean
+	size: HeadingSize
 }
 
 const { color = 'black', hasDivider = false, size } = Astro.props
@@ -11,66 +11,63 @@ const Element = size === 'd1' || size === 'd2' ? 'h1' : size
 const display = size === 'd1' || size === 'd2' ? size : ''
 ---
 
-<Element
-  data-comp-heading
-  class:list={[{ 'has-divider': hasDivider }, color, display]}
->
-  <slot />
+<Element data-comp-heading class:list={[{ 'has-divider': hasDivider }, color, display]}>
+	<slot />
 </Element>
 
 <style>
-  [data-comp-heading] {
-    font-weight: 600;
-  }
-  .d1 {
-    font-size: clamp(var(--font-size-d2), 7vw, var(--font-size-d1));
-    line-height: var(--line-height-d1);
-    margin-bottom: 0;
-  }
-  .d2 {
-    font-size: clamp(var(--font-size-h2), 7vw, var(--font-size-d2));
-    line-height: clamp(var(--line-height-d2));
-    margin-bottom: 0;
-  }
+	[data-comp-heading] {
+		font-weight: 600;
+	}
+	.d1 {
+		font-size: clamp(var(--font-size-d2), 7vw, var(--font-size-d1));
+		line-height: var(--line-height-d1);
+		margin-bottom: 0;
+	}
+	.d2 {
+		font-size: clamp(var(--font-size-h2), 7vw, var(--font-size-d2));
+		line-height: clamp(var(--line-height-d2));
+		margin-bottom: 0;
+	}
 
-  h1 {
-    font-size: clamp(var(--font-size-h2), 7vw, var(--font-size-h1));
-    line-height: var(--line-height-h1);
-    margin-bottom: 0;
-  }
-  h2 {
-    font-size: clamp(var(--font-size-h3), 4vw, var(--font-size-h2));
-    line-height: clamp(var(--line-height-h3), 7vw, var(--line-height-h2));
-    margin-bottom: var(--sp-sm);
-  }
-  h3 {
-    font-size: clamp(var(--font-size-h4), 7vw, var(--font-size-h4));
-    line-height: clamp(var(--line-height-h4), 7vw, var(--line-height-h3));
-  }
-  h4 {
-    font-size: clamp(var(--font-size-p-lg), 7vw, var(--font-size-h4));
-    line-height: clamp(var(--line-height-p-lg), 7vw, var(--line-height-h4));
-  }
+	h1 {
+		font-size: clamp(var(--font-size-h2), 7vw, var(--font-size-h1));
+		line-height: var(--line-height-h1);
+		margin-bottom: 0;
+	}
+	h2 {
+		font-size: clamp(var(--font-size-h3), 4vw, var(--font-size-h2));
+		line-height: clamp(var(--line-height-h3), 7vw, var(--line-height-h2));
+		margin-bottom: var(--sp-sm);
+	}
+	h3 {
+		font-size: clamp(var(--font-size-h4), 7vw, var(--font-size-h4));
+		line-height: clamp(var(--line-height-h4), 7vw, var(--line-height-h3));
+	}
+	h4 {
+		font-size: clamp(var(--font-size-p-lg), 7vw, var(--font-size-h4));
+		line-height: clamp(var(--line-height-p-lg), 7vw, var(--line-height-h4));
+	}
 
-  .black {
-    color: var(--color-black);
-  }
-  .white {
-    color: var(--color-white);
-  }
+	.black {
+		color: var(--color-black);
+	}
+	.white {
+		color: var(--color-white);
+	}
 
-  .has-divider {
-    --divider-offset: -1.5rem;
-    position: relative;
-    margin-top: calc(-1 * var(--divider-offset));
-  }
-  .has-divider::before {
-    background: var(--grad-blue-to-fuchsia);
-    content: '';
-    height: 5px;
-    left: 0;
-    position: absolute;
-    top: var(--divider-offset);
-    width: 4.5rem;
-  }
+	.has-divider {
+		--divider-offset: -1.5rem;
+		position: relative;
+		margin-top: calc(-1 * var(--divider-offset));
+	}
+	.has-divider::before {
+		background: var(--grad-blue-to-fuchsia);
+		content: '';
+		height: 5px;
+		left: 0;
+		position: absolute;
+		top: var(--divider-offset);
+		width: 4.5rem;
+	}
 </style>

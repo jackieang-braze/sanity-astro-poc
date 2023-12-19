@@ -6,6 +6,20 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'width',
+      title: 'Width',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Small', value: 'sm'},
+          {title: 'Medium', value: 'md'},
+          {title: 'Large', value: 'lg'},
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
@@ -16,9 +30,28 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'statusFlag',
+      title: 'Status Flag',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'None', value: undefined},
+          {title: 'New', value: 'New!'},
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: undefined,
+    }),
+    defineField({
       name: 'bannerImage',
       title: 'Background Image',
       type: 'image',
+    }),
+    defineField({
+      name: 'cta',
+      title: 'CTA',
+      type: 'cta',
     }),
   ],
 })

@@ -6,60 +6,60 @@ import Flex from '@components/atoms/Flex.astro'
 import type { HeadingSize, XPosition } from 'bl-astro'
 
 interface Props {
-  imgSrc?: string
-  imgAlt: string
-  imgWidthPx?: number
-  heading?: string
-  headingSize?: HeadingSize
-  description?: string
-  subheading?: string
-  eyebrow?: string
-  imgPosition?: XPosition
+	imgSrc?: string
+	imgAlt: string
+	imgWidthPx?: number
+	heading?: string
+	headingSize?: HeadingSize
+	description?: string
+	subheading?: string
+	eyebrow?: string
+	imgPosition?: XPosition
 }
 const {
-  imgSrc,
-  imgAlt,
-  imgWidthPx = 150,
-  heading,
-  headingSize = 'h3',
-  description,
-  subheading,
-  eyebrow,
-  imgPosition = 'left',
+	imgSrc,
+	imgAlt,
+	imgWidthPx = 150,
+	heading,
+	headingSize = 'h3',
+	description,
+	subheading,
+	eyebrow,
+	imgPosition = 'left'
 } = Astro.props
 const direction = imgPosition === 'left' ? 'row' : 'row-reverse'
 const imgWidth = `${imgWidthPx}px`
 ---
 
 <div class="wrapper">
-  <div class="img">
-    <Image src={imgSrc} alt={imgAlt} width={imgWidth} />
-  </div>
-  <Flex direction="column" gap="6px">
-    {
-      eyebrow && (
-        <Text color="blue-600" weight={500} size="sm">
-          {eyebrow}
-        </Text>
-      )
-    }
-    {heading && <Heading size={headingSize}>{heading}</Heading>}
-    {subheading && <Text weight="500">{subheading}</Text>}
-    {description && <Text>{description}</Text>}
-  </Flex>
+	<div class="img">
+		<Image src={imgSrc} alt={imgAlt} width={imgWidth} />
+	</div>
+	<Flex direction="column" gap="6px">
+		{
+			eyebrow && (
+				<Text color="blue-600" weight={500} size="sm">
+					{eyebrow}
+				</Text>
+			)
+		}
+		{heading && <Heading size={headingSize}>{heading}</Heading>}
+		{subheading && <Text weight="500">{subheading}</Text>}
+		{description && <Text>{description}</Text>}
+	</Flex>
 </div>
 
 <style define:vars={{ direction: `${direction}` }}>
-  .wrapper {
-    display: flex;
-    flex-direction: var(--direction);
-    gap: var(--space-xxl);
-    align-items: center;
-  }
+	.wrapper {
+		display: flex;
+		flex-direction: var(--direction);
+		gap: var(--space-xxl);
+		align-items: center;
+	}
 
-  @media (max-width: 600px) {
-    .wrapper {
-      flex-direction: column;
-    }
-  }
+	@media (max-width: 600px) {
+		.wrapper {
+			flex-direction: column;
+		}
+	}
 </style>

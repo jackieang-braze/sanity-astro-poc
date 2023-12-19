@@ -1,0 +1,16 @@
+---
+import Grid from '@components/atoms/Grid.astro'
+import type { TshirtSize } from 'bl-astro'
+interface Props {
+	width?: 'md' | 'lg'
+	columnsAtFullWidth?: number
+}
+
+const { width = 'md', columnsAtFullWidth = 3 } = Astro.props
+
+const widthDir = width === 'md' ? 64 :75
+---
+
+<Grid columnsAtFullWidth={columnsAtFullWidth} containerMaxWidthRem={widthDir} justify="center">
+	<slot />
+</Grid>

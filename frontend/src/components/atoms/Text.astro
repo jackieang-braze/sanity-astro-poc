@@ -1,66 +1,66 @@
 ---
 interface Props {
-  as?: 'p' | 'span' | 'div'
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  weight?: 200 | 400 | 500 | 600
-  color?: 'white' | 'black' | 'gray-500' | 'blue-600'
+	as?: 'p' | 'span' | 'div'
+	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+	weight?: 200 | 400 | 500 | 600
+	color?: 'white' | 'black' | 'gray-500' | 'blue-600'
 }
 const { size = 'md', weight = 400, color, as: Element = 'p' } = Astro.props
 ---
 
 <Element data-comp-text class:list={[size, color]} style={`font-weight: ${weight}`}>
-  <slot />
+	<slot />
 </Element>
 
 <style>
-  [data-comp-text] {
-    margin-block: 0.5rem;
-  }
-  p:first-child {
-    margin-top: 0;
-  }
-  p:last-child {
-    margin-bottom: 0;
-  }
-  .white {
-    color: var(--color-white);
-  }
-  .black {
-    color: var(--color-black);
-  }
-  .gray-500 {
-    color: var(--color-gray-500);
-  }
-  .blue-600 {
-    color: var(--color-blue-600);
-  }
+	[data-comp-text] {
+		margin-block: 0.5rem;
+	}
+	p:first-child {
+		margin-top: 0;
+	}
+	p:last-child {
+		margin-bottom: 0;
+	}
+	.white {
+		color: var(--color-white);
+	}
+	.black {
+		color: var(--color-black);
+	}
+	.gray-500 {
+		color: var(--color-gray-500);
+	}
+	.blue-600 {
+		color: var(--color-blue-600);
+	}
 
-  .xs {
-    margin-block: 0;
-    font-size: var(--font-size-p-xs);
-    line-height: var(--line-height-p-xs);
-  }
-  .sm {
-    margin-block: 0;
-    font-size: var(--font-size-p-sm);
-    line-height: var(--line-height-p-sm);
-  }
+	.xs {
+		margin-block: 0;
+		font-size: var(--font-size-p-xs);
+		line-height: var(--line-height-p-xs);
+	}
+	.sm {
+		margin-block: 0;
+		font-size: var(--font-size-p-sm);
+		line-height: var(--line-height-p-sm);
+	}
 
-  .h2 {
-    font-size: clamp(var(--font-size-h3), 4vw, var(--font-size-h2));
-    line-height: clamp(var(--line-height-h3), 7vw, var(--line-height-h2));
-    margin-bottom: var(--sp-sm);
-  }
-  .md {
-    font-size: var(--font-size-p-md);
-    line-height: var(--line-height-p-md);
-  }
-  .lg {
-    font-size: var(--font-size-p-lg);
-    line-height: var(--line-height-p-lg);
-  }
-  .xl {
-    font-size: var(--font-size-p-xl);
-    line-height: var(--line-height-p-xl);
-  }
+	.h2 {
+		font-size: clamp(var(--font-size-h3), 4vw, var(--font-size-h2));
+		line-height: clamp(var(--line-height-h3), 7vw, var(--line-height-h2));
+		margin-bottom: var(--sp-sm);
+	}
+	.md {
+		font-size: var(--font-size-p-md);
+		line-height: var(--line-height-p-md);
+	}
+	.lg {
+		font-size: var(--font-size-p-lg);
+		line-height: var(--line-height-p-lg);
+	}
+	.xl {
+		font-size: var(--font-size-p-xl);
+		line-height: var(--line-height-p-xl);
+	}
 </style>

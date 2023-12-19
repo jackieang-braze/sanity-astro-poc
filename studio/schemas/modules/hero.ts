@@ -37,24 +37,41 @@ export default defineType({
       ],
       validation: (Rule) => Rule.max(2),
     }),
-
-    // defineField({
-    //   name: 'cta',
-    //   title: 'CTA 1',
-    //   type: 'reference',
-    //   to: [{type: 'cta'}],
-    // }),
-    // defineField({
-    //   name: 'cta2',
-    //   title: 'CTA 2',
-    //   type: 'reference',
-    //   to: [{type: 'cta'}],
-    // }),
-
-    // defineField({
-    //   name: 'heroImage',
-    //   title: 'Hero Image',
-    //   type: 'string',
-    // }),
+    defineField({
+      name: 'background',
+      title: 'Background',
+      type: 'object',
+      options: {
+        collapsible: true,
+      },
+      fields: [
+        defineField({
+          name: 'image',
+          title: 'Image',
+          type: 'string',
+          options: {
+            list: [
+              {title: 'None', value: undefined},
+              {title: 'Squiggle 1', value: 'squiggle-1'},
+              {title: 'Squiggle 2', value: 'squiggle-2'},
+            ],
+          },
+          initialValue: undefined,
+        }),
+        defineField({
+          name: 'color',
+          title: 'Color',
+          type: 'string',
+          options: {
+            list: [
+              {title: 'White', value: 'white'},
+              {title: 'Blue', value: 'blue-500'},
+            ],
+            layout: 'radio',
+            direction: 'horizontal',
+          },
+        }),
+      ],
+    }),
   ],
 })

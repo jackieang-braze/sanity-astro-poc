@@ -1,37 +1,37 @@
 ---
 interface Props {
-  gap?: string
-  align?: 'start' | 'center' | 'end'
-  justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around'
-  wrap?: boolean
-  direction?: 'row' | 'column'
-  width?: string
+	gap?: string
+	align?: 'start' | 'center' | 'end'
+	justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around'
+	wrap?: boolean
+	direction?: 'row' | 'column'
+	width?: string
 }
 const { gap, align, justify, wrap, direction, width = '100%' } = Astro.props
 const wrapDirective = wrap ? 'wrap' : 'no-wrap'
 ---
 
 <div data-comp-flex>
-  <slot />
+	<slot />
 </div>
 
 <style
-  define:vars={{
-    gap,
-    align,
-    justify,
-    wrap: wrapDirective,
-    direction,
-    width,
-  }}
+	define:vars={{
+		gap,
+		align,
+		justify,
+		wrap: wrapDirective,
+		direction,
+		width
+	}}
 >
-  [data-comp-flex] {
-    align-items: var(--align);
-    display: flex;
-    flex-direction: var(--direction);
-    flex-wrap: var(--wrap);
-    gap: var(--gap);
-    justify-content: var(--justify);
-    width: var(--width);
-  }
+	[data-comp-flex] {
+		align-items: var(--align);
+		display: flex;
+		flex-direction: var(--direction);
+		flex-wrap: var(--wrap);
+		gap: var(--gap);
+		justify-content: var(--justify);
+		width: var(--width);
+	}
 </style>

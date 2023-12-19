@@ -1,63 +1,61 @@
 ---
 import Container from '@components/atoms/Container.astro'
-import Text from '@components/atoms/Text.astro'
-import Heading from '@components/atoms/Heading.astro'
-import Section from '@components/atoms/Section.astro'
 import type { TshirtSize } from 'bl-astro'
-
+import type { Image } from 'sanity'
 interface Props {
-  bgColor?: 'blue-fuchsia-gradient' | 'white' | 'black' | 'blue-300'
-  color?: 'white' | 'black'
-  bgImage: 'squiggle-1' | 'squiggle-2' | 'certification-squiggle'
-  paddingY?: TshirtSize
+	bgColor?: 'blue-fuchsia-gradient' | 'white' | 'black' | 'blue-300'
+	color?: 'white' | 'black'
+	bgImage: 'squiggle-1' | 'squiggle-2' | 'certification-squiggle' | Image
+	paddingY?: TshirtSize
 }
-const { bgColor, color, bgImage, paddingY = 'lg' } = Astro.props
+const { bgColor, bgImage, paddingY = 'lg' } = Astro.props
 const bgImageDirective = `var(--svg-${bgImage})`
 const bgColorDirective =
-  bgColor === 'blue-fuchsia-gradient'
-    ? 'var(--grad-blue-to-fuchsia)'
-    : `var(--color-${bgColor})`
+	bgColor === 'blue-fuchsia-gradient' ? 'var(--grad-blue-to-fuchsia)' : `var(--color-${bgColor})`
 ---
 
 <section>
-  <div class:list={['squiggle-wrapper', bgImage]}>
-    <Container width="lg" marginY={paddingY}>
-      <div class="content-wrapper"><slot /></div>
-    </Container>
-  </div>
+	<div class:list={['squiggle-wrapper', bgImage]}>
+		<Container width="lg" marginY={paddingY}>
+			<div class="content-wrapper"><slot /></div>
+		</Container>
+	</div>
 </section>
 
 <style
-  define:vars={{ 'background-image': bgImageDirective, 'background-color': bgColorDirective }}
+	define:vars={{
+		'background-image': bgImageDirective,
+		'background-color': bgColorDirective
+	}}
 >
-  section {
-    background: var(--background-color);
-  }
+	section {
+		background: var(--background-color);
+	}
 
-  .squiggle-wrapper {
-    background: var(--background-image);
-    background-repeat: no-repeat;
-    container-type: inline-size;
-  }
-  .squiggle-1 {
-    background-position: top -11rem right -11rem;
-    background-size: clamp(35rem, 50vw, 45rem) auto;
-  }
-  .squiggle-2 {
-    background-position: bottom -6rem right 0;
-    background-size: clamp(35rem, 50vw, 45rem) auto;
-  }
-  .certification-squiggle {
-    background-position: top -1rem right 0;
-    background-size: clamp(15rem, 50vw, 31rem) auto;
-  }
+	.squiggle-wrapper {
+		background: var(--background-image);
+		background-repeat: no-repeat;
+		container-type: inline-size;
+	}
+	.squiggle-1 {
+		background-position: top -11rem right -11rem;
+		background-size: clamp(35rem, 50vw, 45rem) auto;
+	}
+	.squiggle-2 {
+		background-position: bottom -6rem right 0;
+		background-size: clamp(35rem, 50vw, 45rem) auto;
+	}
+	.certification-squiggle {
+		background-position: top -1rem right 0;
+		background-size: clamp(15rem, 50vw, 31rem) auto;
+	}
 
-  .content-wrapper {
-    width: var(--width-body-sm);
-  }
-  @media (width < 1000px) {
-    .squiggle-wrapper {
-      background-image: none;
-    }
-  }
+	.content-wrapper {
+		width: var(--width-body-sm);
+	}
+	@media (width < 1000px) {
+		.squiggle-wrapper {
+			background-image: none;
+		}
+	}
 </style>

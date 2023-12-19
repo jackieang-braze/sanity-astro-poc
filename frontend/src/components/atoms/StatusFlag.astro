@@ -1,37 +1,37 @@
 ---
 import Text from './Text.astro'
 interface Props {
-  status: 'New!' | 'Coming Soon'
-  overrideText?: string
+	status: 'New!' | 'Coming Soon'
+	overrideText?: string
 }
 const { status, overrideText } = Astro.props
 const text = overrideText ? overrideText : status
 ---
 
 <div>
-  <span class="material-symbols-outlined">star</span>
-  <Text size="sm" weight="600">{text}</Text>
+	<span class="material-symbols-outlined">star</span>
+	<Text size="sm" weight="600">{text}</Text>
 </div>
 
 <style>
-  div {
-    display: flex;
-    gap: 0.69219rem;
-    align-items: center;
-    background-color: var(--color-yellow-200);
-    padding: var(--space-xs) var(--space-sm);
-    position: absolute;
-    border-radius: var(--radius-circle);
-    top: -1rem;
-    right: -2rem;
-  }
-  .material-symbols-outlined {
-    position: relative;
-    bottom: 2px;
-    font-variation-settings:
-      'FILL' 1,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
-  }
+	div {
+		display: flex;
+		gap: 0.69219rem;
+		align-items: center;
+		background-color: var(--color-yellow-200);
+		padding: var(--space-xs) var(--space-sm);
+		position: absolute;
+		border-radius: var(--radius-circle);
+		top: -1rem;
+		right: -2rem;
+	}
+	.material-symbols-outlined {
+		position: relative;
+		bottom: 2px;
+		font-variation-settings:
+			'FILL' 1,
+			'wght' 400,
+			'GRAD' 0,
+			'opsz' 24;
+	}
 </style>

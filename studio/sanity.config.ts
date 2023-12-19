@@ -3,6 +3,7 @@ import {deskTool} from 'sanity/desk'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemas'
 import {myStructure, pageStructure} from './deskStructure'
+import {media} from 'sanity-plugin-media'
 
 export default defineConfig({
   name: 'default',
@@ -22,7 +23,7 @@ export default defineConfig({
       title: 'Page Builder',
       structure: pageStructure,
     }),
-
+    media(),
     visionTool({
       defaultApiVersion: 'v2021-03-25',
       defaultDataset: 'production',

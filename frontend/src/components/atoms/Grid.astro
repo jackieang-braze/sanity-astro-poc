@@ -1,34 +1,29 @@
 ---
 interface Props {
-  columnsAtFullWidth: number
-  gapRem?: number
-  containerMaxWidthRem?: number
-  justify?: 'start' | 'end' | 'center'
+	columnsAtFullWidth: number
+	gapRem?: number
+	containerMaxWidthRem?: number
+	justify?: 'start' | 'end' | 'center'
 }
-const {
-  columnsAtFullWidth,
-  gapRem = 1,
-  containerMaxWidthRem = 75,
-  justify = 'start',
-} = Astro.props
+const { columnsAtFullWidth, gapRem = 1, containerMaxWidthRem = 75, justify = 'start' } = Astro.props
 ---
 
 <div>
-  <slot />
+	<slot />
 </div>
 
 <style
-  define:vars={{
-    gap: gapRem + 'rem',
-    'max-col-width':
-      (containerMaxWidthRem - (columnsAtFullWidth - 1) * gapRem) / columnsAtFullWidth + 'rem',
-    justify: justify,
-  }}
+	define:vars={{
+		gap: gapRem + 'rem',
+		'max-col-width':
+			(containerMaxWidthRem - (columnsAtFullWidth - 1) * gapRem) / columnsAtFullWidth + 'rem',
+		justify: justify
+	}}
 >
-  div {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(calc(var(--max-col-width)), 1fr));
-    justify-items: var(--justify);
-    gap: var(--gap);
-  }
+	div {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(calc(var(--max-col-width)), 1fr));
+		justify-items: var(--justify);
+		gap: var(--gap);
+	}
 </style>

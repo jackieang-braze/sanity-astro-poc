@@ -22,18 +22,13 @@ export default defineType({
     defineField({
       name: 'hero',
       title: 'Hero',
-      type: 'hero'
+      type: 'hero',
     }),
     defineField({
       name: 'modules',
       title: 'Modules',
       type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: [{type: 'hero'}, {type: 'announcementBanner'}, {type: 'courseSection'}],
-        },
-      ],
+      of: [{type: 'announcementBanner'}, {type: 'courseCardSection'}],
     }),
   ],
 })
