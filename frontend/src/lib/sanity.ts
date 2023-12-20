@@ -1,7 +1,7 @@
 import { sanityClient } from 'sanity:client'
 import type { PortableTextBlock, Slug, ImageAsset, Image } from 'sanity'
 import groq from 'groq'
-import type { TshirtSize } from 'bl-astro'
+import type { HeadingSize, TshirtSize } from 'bl-astro'
 import PortableTextImage from '@components/PortableTextImage.astro'
 
 export async function getExams(): Promise<CertificationExam[]> {
@@ -42,24 +42,24 @@ export async function getModuleViaKey<T>(key: string): Promise<T> {
 	return await sanityClient.fetch(groq`*[_key == $key][0]`, { key })
 }
 
-export async function getExam(slug: string): Promise<CertificationExam> {
+export async function getExam(slug: string): Promise<CertificationExamType> {
 	return await sanityClient.fetch(
 		groq`*[_type == "certificationExam" && slug.current == $slug][0]`,
 		{ slug }
 	)
 }
 
-export async function getExamViaID(id: string): Promise<CertificationExam> {
+export async function getExamViaID(id: string): Promise<CertificationExamType> {
 	return await sanityClient.fetch(groq`*[_type == "certificationExam" && _id == $id][0]`, { id })
 }
-export interface CertificationExam {
+export interface CertificationExamType {
 	_type: 'certificationExam'
 	_createdAt: string
 	_updatedAt: string
 	_ref: string
 	cardType: 'certification'
 	title: string
-	slug: string
+	slug: Slug
 	shortDescription: string
 	longDescription: PortableTextBlock[]
 	details: ExamDetails
@@ -88,8 +88,8 @@ export interface Page {
 export interface ModuleTypes {
 	hero: HeroType
 	announcementBanner: AnnouncementBannerType
-	courseCardGrid: CourseCardGridType
 	cta: CTAType
+	courseCardSection: CourseCardSectionType
 }
 
 export interface ModuleReference {
@@ -126,10 +126,26 @@ export interface CourseCardGridType {
 	_rev: string
 	_id: string
 	_ref: string
+	gridHeading: HeadingGroupType
+	width: 'md' | 'lg'
+	columnsAtFullWidth: number
+	cardSection: CertificationExamType[]
+}
+export interface HeadingGroupType {
+	_type: 'headingGroup'
+	_rev: string
+	_id: string
+	_ref: string
 	heading: string
 	subheading: string
-	cta: CTAType
-	cardSection: CertificationExam[]
+	headingSize: HeadingSize
+}
+export interface CourseCardSectionType {
+	_type: 'courseCardSection'
+	_rev: string
+	_id: string
+	_ref: string
+	content: CourseCardGridType[]
 }
 export interface CTAType {
 	_type: 'cta'

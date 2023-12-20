@@ -24,6 +24,7 @@ export default defineType({
           {title: 'H6', value: 'h6'},
         ],
       },
+      initialValue: 'h1',
     }),
   ],
 })

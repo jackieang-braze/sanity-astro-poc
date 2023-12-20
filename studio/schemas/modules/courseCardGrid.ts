@@ -6,14 +6,12 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'heading',
-      title: 'Section Heading',
-      type: 'string',
-    }),
-    defineField({
-      name: 'subheading',
-      title: 'Section Subheading',
-      type: 'string',
+      name: 'gridHeading',
+      title: 'Section Heading and Subheading',
+      type: 'headingGroup',
+      options: {
+        collapsible: true,
+      },
     }),
     defineField({
       name: 'width',
@@ -25,10 +23,10 @@ export default defineType({
           {title: 'Large', value: 'lg'},
         ],
       },
-      initialValue: 'medium',
+      initialValue: 'md',
     }),
     defineField({
-      name: 'columnsAtMaxWidth',
+      name: 'columnsAtFullWidth',
       title: 'Columns at Max Width',
       type: 'number',
       description: 'Number of columns to display at max width',
