@@ -1,10 +1,9 @@
 import { sanityClient } from 'sanity:client'
-import type { PortableTextBlock, Slug, ImageAsset, Image } from 'sanity'
+import type { PortableTextBlock, Slug, Image } from 'sanity'
 import groq from 'groq'
 import type { HeadingSize, TshirtSize } from 'bl-astro'
-import PortableTextImage from '@components/PortableTextImage.astro'
 
-export async function getExams(): Promise<CertificationExam[]> {
+export async function getExams(): Promise<CertificationExamType[]> {
 	return await sanityClient.fetch(groq`*[_type == "certificationExam" && defined(slug.current) ]`)
 }
 
@@ -52,6 +51,10 @@ export async function getExam(slug: string): Promise<CertificationExamType> {
 export async function getExamViaID(id: string): Promise<CertificationExamType> {
 	return await sanityClient.fetch(groq`*[_type == "certificationExam" && _id == $id][0]`, { id })
 }
+export async function getTestimonialViaID(id: string): Promise<TestimonialCardType> {
+	return await sanityClient.fetch(groq`*[_type == "testimonialCard" && _id == $id][0]`, { id })
+}
+
 export interface CertificationExamType {
 	_type: 'certificationExam'
 	_createdAt: string
@@ -84,12 +87,16 @@ export interface Page {
 	modules: ModuleReference[]
 	hero: HeroType
 }
-
+export interface CardTypes {
+	certification: CertificationExamType
+	testimonial: TestimonialCardType
+}
 export interface ModuleTypes {
 	hero: HeroType
 	announcementBanner: AnnouncementBannerType
 	cta: CTAType
 	courseCardSection: CourseCardSectionType
+	testimonialSection: TestimonialSectionType
 }
 
 export interface ModuleReference {
@@ -157,4 +164,36 @@ export interface CTAType {
 	showArrow: boolean
 	icon: string
 	variant: 'primary' | 'secondary' | 'tertiary'
+}
+
+export interface TestimonialSectionType {
+	_type: 'testimonialSection'
+	_rev: string
+	_id: string
+	_ref: string
+	testimonialHeading: HeadingGroupType
+	testimonialCards: TestimonialCardType[]
+	testimonialCta: CTAType
+	backgroundColor: 'teal-700' | 'blue-50' | 'white'
+	columnsAtFullWidth: number
+}
+
+export interface TestimonialCardType {
+	_type: 'testimonialCard'
+	_rev: string
+	_id: string
+	_ref: string
+	companyName: string
+	highlighted: string
+	testimonial: string
+	sourceName: string
+	sourceDescription: string
+	headshot: Image
+	companyLogo: AllyImage
+	logoImgUrl: string
+	headshotImgUrl: string
+}
+
+export interface AllyImage extends Image {
+	alt: string
 }

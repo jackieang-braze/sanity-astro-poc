@@ -1,0 +1,40 @@
+---
+import Card from '@components/atoms/Card.astro'
+import Text from '@components/atoms/Text.astro'
+import Image from '@components/atoms/Image.astro'
+import Flex from '@components/atoms/Flex.astro'
+interface Props {
+  logoImgSrc?: string
+  logoImgAlt?: string
+  highlight: string
+  quote: string
+  name?: string
+  description: string
+  headshotImgSrc: string
+}
+const {
+  logoImgSrc,
+  highlight,
+  quote,
+  name,
+  logoImgAlt,
+  description,
+  headshotImgSrc = 'https://placeholder.co/50x50/',
+} = Astro.props
+---
+
+<Card paddingX="md" paddingY="md" gap="xs" fit-content>
+  {logoImgSrc && <Image src={logoImgSrc} alt=`${logoImgAlt} logo` width="100px" />}
+  <Text size="md" weight={600}>"{highlight}"</Text>
+  <Text size="md">"{quote}"</Text>
+  <Flex direction="row" gap="16px">
+    <div class="headshotImgSrc">
+      <Image src={headshotImgSrc} alt=`${name}, headshotImgSrc` borderRadius="50%" width="40px" />
+    </div>
+    <Flex direction="column" gap="0" justify='center'>
+      {name && <Text size="sm" weight={600}>{name}</Text> <Text size="sm" weight={600} color="gray-500">{description}</Text>}
+      {!name && <Text size="sm" weight={600} color="gray-500">{description}</Text> }
+      
+    </Flex>
+  </Flex>
+</Card>

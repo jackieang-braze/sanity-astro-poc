@@ -20,6 +20,8 @@ import Link from '@components/Link.astro'
 import Flex from '@components/atoms/Flex.astro'
 import CourseCard from '@components/molecules/CourseCard/CourseCard.astro'
 import CourseCardSection from '@components/molecules/CourseCard/CourseCardSection.astro'
+import Testimonial from '@components/molecules/Testimonial/Testimonial.astro'
+import TestimonialSection from '@components/molecules/Testimonial/TestimonialSection.astro'
 
 export async function getStaticPaths() {
   const pages = await getPages()
@@ -99,6 +101,22 @@ const modules: ModuleReference[] = page.modules
               )}
                   </Section>
               )
+            case 'testimonialSection':
+              const testimonialSection = item as TestimonialSection
+              return (
+                <Section>
+                  <Container width={testimonialSection.width}>
+                    <TestimonialSection
+                      heading={testimonialSection.testimonialHeading.heading}
+                      subheading={testimonialSection.testimonialHeading.subheading}
+                      bg={testimonialSection.backgroundColor}
+                      cta={testimonialSection.testimonialCta}
+                      testimonials={testimonialSection.testimonialCards}
+                      columnsAtFullWidth={testimonialSection.columnsAtFullWidth}
+                      ></TestimonialSection>
+                  </Container>
+                </Section>
+              )
             default:
               throw new Error(`Unknown module type: ${item._type}`)
           }
@@ -107,18 +125,3 @@ const modules: ModuleReference[] = page.modules
   
   </BareLayout>
 </Layout>
-<!-- 
-<CourseCardGrid>
-                {grid.cardSection && grid.cardSection.map((card) => (
-                  <CourseCard
-                    type={card.cardType}
-                    title={card.title}
-                    shortDescription={card.shortDescription}
-                    ctaHref={card.slug}
-                    durationMinutes={card.details.examDuration}
-                    level={card.details.examLevel}
-                    priceUSD={card.details.examPrice}
-
-                  />
-                ))}
-                {!grid.cardSection && <Heading size="h3">Add courses!</Heading>} </CourseCardGrid> -->

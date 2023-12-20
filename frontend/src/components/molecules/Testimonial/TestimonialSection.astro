@@ -1,0 +1,89 @@
+---
+import Container from '@components/atoms/Container.astro'
+import HeadingGroup from '../HeadingGroup.astro'
+import { type TestimonialCardType, type CTAType, getTestimonialViaID } from '@lib/sanity'
+import Testimonial from './Testimonial.astro'
+import { urlFor } from '@lib/urlFor'
+import Link from '@components/Link.astro'
+import Grid from '@components/atoms/Grid.astro'
+
+interface Props {
+  bg?: 'teal-700' | 'blue-50' | 'white'
+  mode?: 'dark' | 'light'
+  heading: string
+  subheading?: string
+  testimonials: TestimonialCardType[]
+  cta?: CTAType
+  columnsAtFullWidth?: number
+}
+const { bg = 'white', mode = 'light', heading, subheading, testimonials, cta, columnsAtFullWidth=3 } = Astro.props
+const headingColor = mode === 'dark' ? 'white' : 'black'
+const quotations =
+  mode === 'dark' ? 'var(--svg-quotations-light)' : 'var(--svg-quotations-dark)'
+const columnGap = columnsAtFullWidth === 4 ? 2 : 3 ? 4 : 2 ? 5 : 0
+let testimonialArray : TestimonialCardType[] = []
+
+async function fetchTestimonials() {
+  if (testimonials) {
+    for (const testimonial of testimonials) {
+      const fetchedCard = await getTestimonialViaID(testimonial._ref)
+      fetchedCard.logoImgUrl = urlFor(fetchedCard.companyLogo).url()
+      fetchedCard.headshotImgUrl = urlFor(fetchedCard.headshot).url()
+      testimonialArray.push(fetchedCard)
+    }
+  }
+}
+await fetchTestimonials()
+---
+
+<section data-comp-testimonial-section>
+  <div class="quotation-wrapper">
+    <Container width="lg">
+      <HeadingGroup color={headingColor} size="h2" heading={heading} subheading={subheading}/>
+    </Container>
+    <Container width="xl" marginY="md">
+      {testimonialArray && (
+        <Grid columnsAtFullWidth={columnsAtFullWidth} gapRem={columnGap}>{testimonialArray.map((testimonial) => (
+          <Testimonial
+            logoImgSrc={testimonial.logoImgUrl}
+            logoImgAlt={testimonial.companyLogo.alt}
+            highlight={testimonial.highlighted}
+            quote={testimonial.testimonial}
+            name={testimonial.sourceName}
+            description={testimonial.sourceDescription}
+            headshotImgSrc={testimonial.headshotImgUrl}
+            />
+        ))}</Grid>
+      )
+        }    
+    </Container>
+    {cta && <div class="btn_wraper"><Link variant={cta.variant} href={cta.externalLink} icon={cta.icon} showArrow={cta.showArrow}>{cta.ctaText}</Link></div> }
+
+  </div>
+</section>
+
+<style define:vars={{ bg: `var(--color-${bg})`, quotations: quotations }}>
+  [data-comp-testimonial-section] {
+    padding: var(--space-lg) 0;
+    background: var(--bg);
+    display: grid;
+  }
+  .btn_wraper {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-sm);
+  }
+  .quotation-wrapper {
+    background: var(--quotations);
+    background-repeat: no-repeat;
+    background-position: top 1rem left 8rem;
+  }
+  @media (max-width: 768px) {
+    [data-comp-testimonial-section] {
+      padding: var(--space-md) 0;
+    }
+    .quotation-wrapper {
+      background: none;
+    }
+  }
+</style>
