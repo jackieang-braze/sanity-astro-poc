@@ -42,13 +42,14 @@ const modules: ModuleReference[] = page.modules
 <Layout title={slug}>
   <BareLayout>
     <SquiggleSection bgImage={page.hero.image}>
-      <Flex direction="column" gap="1rem">
+      <Flex direction="column" gap="var(--space-md)">
+        <Flex direction='column' gap="1rem">
       {
-        page.hero.eyebrow && <Text weight={600}>{page.hero.eyebrow}</Text>
+        page.hero.eyebrow && <Text weight={600} size="md">{page.hero.eyebrow}</Text>
         }
-      <Heading size='h2'>{page.hero.heading}</Heading>
-    <Text>{page.hero.subheading}</Text>
-    <!-- <Link variant={page.hero.ctas[0].variant} href={page.hero.ctas[0].externalLink} icon={page.hero.ctas[0].icon} arrow={page.hero.ctas[0].showArrow}>Learn More</Link> -->
+      <Heading size='d2'>{page.hero.heading}</Heading>
+      <Text size="lg">{page.hero.subheading}</Text>
+      </Flex>
     <Flex direction='row' gap='var(--space-sm)'>{page.hero.ctas && 
         page.hero.ctas.map((cta) =>
         (
@@ -58,13 +59,13 @@ const modules: ModuleReference[] = page.modules
     }</Flex>
      </Flex>
     </SquiggleSection>
-    <Section paddingY='md'>
       {
         modules.map((item: ModuleReference) => {
           switch (item._type) {
             case 'announcementBanner':
               const announcementBanner = item as AnnouncementBannerType
               return (
+                <Section>
                 <Container width={announcementBanner.width}>
                   <AnnouncementBanner
                     heading={announcementBanner.heading}
@@ -77,11 +78,14 @@ const modules: ModuleReference[] = page.modules
                   />
                   <SanityImage image={announcementBanner.bannerImage} />
                 </Container>
+                </Section>
               )
             case 'courseCardSection':
               const section = item as CourseCardSectionType
-
-              return (section.content && section.content.map((grid) =>
+              //wrap in section
+              return (
+                <Section>
+                  {section.content && section.content.map((grid) =>
                 (
                   <CourseCardSection
                     heading={grid.gridHeading.heading}
@@ -90,17 +94,16 @@ const modules: ModuleReference[] = page.modules
                     width={grid.width}
                     columnsAtFullWidth={grid.columnsAtFullWidth}
                     courseCards={grid.cardSection}
-                    
                 />                 
                 )
-              )
+              )}
+                  </Section>
               )
             default:
               throw new Error(`Unknown module type: ${item._type}`)
           }
         })
       }
-    </Section>
   
   </BareLayout>
 </Layout>

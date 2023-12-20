@@ -28,25 +28,27 @@ async function fetchCards(){
 
 await fetchCards()
 ---
+<>
+    <Container width={width} marginY={['md', 0]}>
+        {heading && <HeadingGroup heading={heading} subheading={subheading} size={headingGroupSize} />}
+    </Container>
+    <Container width={width}>
+        <CourseCardGrid width={width} columnsAtFullWidth={columnsAtFullWidth}>
+            { courseCardArray && (courseCardArray.map((card) => 
+                <CourseCard
+                    type="certification"
+                    title={card.title}
+                    shortDescription={card.shortDescription}
+                    ctaHref={card.slug.current}
+                    badgeTag='practitioner'
+                    format={card.details.examFormat}
+                    durationMinutes={card.details.examDuration}
+                    level={card.details.examLevel}
+                    passingScore={card.details.examPassingScore}
+                    priceUSD={card.details.examPrice}
 
-<Container width={width}>
-    {heading && <HeadingGroup heading={heading} subheading={subheading} size={headingGroupSize} />}
-    <CourseCardGrid width={width} columnsAtFullWidth={columnsAtFullWidth}>
-        { courseCardArray && (courseCardArray.map((card) => 
-            <CourseCard
-                type="certification"
-                title={card.title}
-                shortDescription={card.shortDescription}
-                ctaHref={card.slug.current}
-                badgeTag='practitioner'
-                format={card.details.examFormat}
-                durationMinutes={card.details.examDuration}
-                level={card.details.examLevel}
-                passingScore={card.details.examPassingScore}
-                priceUSD={card.details.examPrice}
-
-                />
-        ))}
-                
-    </CourseCardGrid>
-</Section>
+                    />
+            ))}
+        </CourseCardGrid>
+    </Container>
+</>

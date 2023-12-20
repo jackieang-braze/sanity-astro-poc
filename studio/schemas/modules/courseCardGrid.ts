@@ -54,4 +54,17 @@ export default defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'gridHeading.heading',
+      subtitle: 'cardSection',
+    },
+    prepare(selection) {
+      const {title, subtitle} = selection
+      return {
+        title,
+        subtitle: `${subtitle.length} exams`,
+      }
+    },
+  },
 })
