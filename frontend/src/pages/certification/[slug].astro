@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 	return exams.map((exam) => {
 		return {
 			params: {
-				slug: exam.slug || ''
+				slug: exam.slug.current || ''
 			}
 		}
 	})

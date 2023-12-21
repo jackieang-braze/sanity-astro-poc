@@ -28,6 +28,12 @@ export async function getPage(slug: string): Promise<Page> {
 	)
 }
 
+export async function getExam(slug: string): Promise<CertificationExamType> {
+	return await sanityClient.fetch(
+		groq`*[_type == "certificationExam" && slug.current == $slug][0]`,
+		{ slug }
+	)
+}
 export async function getModuleViaID<T>(id: string): Promise<T> {
 	if (!id) {
 		throw new Error('No ID provided')
@@ -39,13 +45,6 @@ export async function getModuleViaKey<T>(key: string): Promise<T> {
 		throw new Error('No key provided')
 	}
 	return await sanityClient.fetch(groq`*[_key == $key][0]`, { key })
-}
-
-export async function getExam(slug: string): Promise<CertificationExamType> {
-	return await sanityClient.fetch(
-		groq`*[_type == "certificationExam" && slug.current == $slug][0]`,
-		{ slug }
-	)
 }
 
 export async function getExamViaID(id: string): Promise<CertificationExamType> {
