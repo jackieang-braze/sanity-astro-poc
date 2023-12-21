@@ -1,8 +1,9 @@
 import {defineType, defineField} from 'sanity'
-
+import {StackCompactIcon} from '@sanity/icons'
 export default defineType({
   name: 'faqSection',
   title: 'FAQ Section',
+  icon: StackCompactIcon,
   type: 'object',
   fields: [
     defineField({
@@ -19,4 +20,14 @@ export default defineType({
       of: [{type: 'faqContent'}],
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+      sections: 'content',
+    },
+    prepare: ({sections}) => ({
+      title: `FAQ Section`,
+      subtitle: `${sections.length} ${sections.length === 1 ? 'block' : 'blocks'}`,
+    }),
+  },
 })

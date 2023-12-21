@@ -1,8 +1,9 @@
 import {defineType, defineField} from 'sanity'
-
+import {BlockElementIcon} from '@sanity/icons'
 export default defineType({
   name: 'fullWidthBanner',
   title: 'Full Width Banner',
+  icon: BlockElementIcon,
   type: 'object',
   fields: [
     defineField({
@@ -54,4 +55,13 @@ export default defineType({
       },
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading.heading',
+    },
+    prepare: ({title}) => ({
+      title: `${title}`,
+      subtitle: 'Full Width Banner',
+    }),
+  },
 })

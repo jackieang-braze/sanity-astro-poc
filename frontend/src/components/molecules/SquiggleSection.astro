@@ -2,6 +2,8 @@
 import Container from '@components/atoms/Container.astro'
 import type { TshirtSize, Colors } from 'bl-astro'
 import type { Image } from 'sanity'
+import { urlFor } from '@lib/urlFor'
+
 interface Props {
 	bgColor?: Colors
 	color?: 'white' | 'black'
@@ -9,13 +11,15 @@ interface Props {
 	paddingY?: TshirtSize
 }
 const { bgColor, bgImage, paddingY = 'lg' } = Astro.props
-const bgImageDirective = `var(--svg-${bgImage})`
 const bgColorDirective =
 	bgColor === 'blue-fuchsia-gradient' ? 'var(--grad-blue-to-fuchsia)' : `var(--color-${bgColor})`
+
+const imgUrl = bgImage ? urlFor(bgImage).url() : ''
+console.log('imgUrl', imgUrl)
 ---
 
 <section>
-	<div class:list={['squiggle-wrapper', bgImage]}>
+	<div class:list={['squiggle-wrapper']}>
 		<Container width="lg" marginY={paddingY}>
 			<div class="content-wrapper"><slot /></div>
 		</Container>
@@ -24,7 +28,7 @@ const bgColorDirective =
 
 <style
 	define:vars={{
-		'background-image': bgImageDirective,
+		'background-image': `url(${imgUrl})`,
 		'background-color': bgColorDirective
 	}}
 >
@@ -36,6 +40,8 @@ const bgColorDirective =
 		background: var(--background-image);
 		background-repeat: no-repeat;
 		container-type: inline-size;
+		background-position: top -1rem right 0;
+		background-size: clamp(35rem, 50vw, 38rem) auto;
 	}
 	.squiggle-1 {
 		background-position: top -11rem right -11rem;

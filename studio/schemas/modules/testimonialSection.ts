@@ -1,8 +1,10 @@
 import {defineType, defineField} from 'sanity'
+import {ThLargeIcon} from '@sanity/icons'
 
 export default defineType({
   name: 'testimonialSection',
   title: 'Testimonial Section',
+  icon: ThLargeIcon,
   type: 'object',
   fields: [
     defineField({
@@ -56,4 +58,13 @@ export default defineType({
       },
     }),
   ],
+  preview: {
+    select: {
+      title: 'testimonialHeading.heading',
+    },
+    prepare: ({title}) => ({
+      title: `${title}`,
+      subtitle: 'Testimonial Section',
+    }),
+  },
 })

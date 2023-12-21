@@ -1,8 +1,10 @@
 import {defineField, defineType} from 'sanity'
+import {ImageIcon} from '@sanity/icons'
 
 export default defineType({
   name: 'announcementBanner',
   title: 'Announcement Banner',
+  icon: ImageIcon,
   type: 'object',
   fields: [
     defineField({
@@ -54,4 +56,13 @@ export default defineType({
       type: 'cta',
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+    },
+    prepare: ({title}) => ({
+      title: `${title}`,
+      subtitle: 'Announcement Banner',
+    }),
+  },
 })

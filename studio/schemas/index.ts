@@ -8,13 +8,13 @@ import faqContent from './documents/faqContent'
 // Modules
 import hero from './modules/hero'
 import announcementBanner from './modules/announcementBanner'
-import courseCardGrid from './modules/courseCardGrid'
 import courseCardSection from './modules/courseCardSection'
 import testimonialSection from './modules/testimonialSection'
 import fullWidthBanner from './modules/fullWidthBanner'
 import faqSection from './modules/faqSection'
 
 // Other fields
+import courseCardGrid from './fields/blockContent/courseCardGrid'
 import allyImage from './fields/allyImage'
 import heading from './fields/heading'
 import examDetails from './fields/examDetails'
@@ -37,7 +37,6 @@ export const schemaTypes = [
   // Modules
   hero,
   announcementBanner,
-  courseCardGrid,
   courseCardSection,
   testimonialSection,
   fullWidthBanner,
@@ -45,6 +44,7 @@ export const schemaTypes = [
 
   // Other fields
   allyImage,
+  courseCardGrid,
   examDetails,
   heading,
   headingGroup,

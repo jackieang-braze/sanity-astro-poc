@@ -21,7 +21,8 @@ export default defineType({
     defineField({
       name: 'subheading',
       title: 'Subheading',
-      type: 'string',
+      type: 'text',
+      validation: (Rule) => Rule.max(200),
     }),
     defineField({
       name: 'ctas',
@@ -48,28 +49,24 @@ export default defineType({
         defineField({
           name: 'image',
           title: 'Image',
-          type: 'string',
-          options: {
-            list: [
-              {title: 'None', value: undefined},
-              {title: 'Squiggle 1', value: 'squiggle-1'},
-              {title: 'Squiggle 2', value: 'squiggle-2'},
-            ],
-          },
-          initialValue: undefined,
+          type: 'image',
         }),
         defineField({
           name: 'color',
           title: 'Color',
-          type: 'string',
+          type: 'simplerColor',
           options: {
-            list: [
-              {title: 'White', value: 'white'},
-              {title: 'Blue', value: 'blue-500'},
+            colorList: [
+              {label: 'White', value: '#ffff'},
+              {label: 'Gray 50', value: '#f8f9f9'},
+              {label: 'Dark Blue 300', value: '#a6aed9'},
+              {label: 'Blue Fuchsia Gradient', value: '#989FE5'},
+              {label: 'Blue 50', value: '#ecf5ff'},
+              {label: 'Blue 300', value: '#99c3f4'},
+              {label: 'Blue 800', value: '#005cc7'},
             ],
-            layout: 'radio',
-            direction: 'horizontal',
           },
+          initialValue: 'white',
         }),
       ],
     }),
