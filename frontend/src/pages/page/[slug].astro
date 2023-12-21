@@ -47,7 +47,6 @@ const heroBgColor = page.hero.background.color.label.split(" ").join("-").toLowe
 const heroTextColor = accessibleTextColor(heroBgColor)
 ---
 
-<Layout title={slug}>
   <BareLayout>
     <SquiggleSection bgImage={page.hero.background.image} bgColor={heroBgColor}>
       <Flex direction="column" gap="var(--space-md)">
@@ -74,25 +73,24 @@ const heroTextColor = accessibleTextColor(heroBgColor)
               const announcementBanner = item as AnnouncementBannerType
               return (
                 <Section>
-                <Container width={announcementBanner.width}>
-                  <AnnouncementBanner
-                    heading={announcementBanner.heading}
-                    subheading={announcementBanner.subheading}
-                    bgImage={announcementBanner.bannerImage}
-                    cta={announcementBanner.cta.ctaText}
-                    url={announcementBanner.cta.externalLink}
-                    linkVariant={announcementBanner.cta.variant}
-                    status={announcementBanner.statusFlag}
-                  />
-                  <SanityImage image={announcementBanner.bannerImage} />
-                </Container>
+                  <Container width={announcementBanner.width}>
+                    <AnnouncementBanner
+                      heading={announcementBanner.heading}
+                      subheading={announcementBanner.subheading}
+                      bgImage={announcementBanner.bannerImage}
+                      cta={announcementBanner.cta.ctaText}
+                      url={announcementBanner.cta.externalLink}
+                      linkVariant={announcementBanner.cta.variant}
+                      status={announcementBanner.statusFlag}
+                    />
+                    <SanityImage image={announcementBanner.bannerImage} />
+                  </Container>
                 </Section>
               )
             case 'courseCardSection':
               const section = item as CourseCardSectionType
-              //wrap in section
               return (
-                <Section>
+              <>
                   {section.content && section.content.map((grid) =>
                 (
                   <CourseCardSection
@@ -105,8 +103,8 @@ const heroTextColor = accessibleTextColor(heroBgColor)
                 />                 
                 )
               )}
-                  </Section>
-              )
+              </>)
+            
             case 'testimonialSection':
               const testimonialSection = item as TestimonialSectionType
               return (
@@ -140,4 +138,3 @@ const heroTextColor = accessibleTextColor(heroBgColor)
       }
   
   </BareLayout>
-</Layout>

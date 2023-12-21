@@ -3,6 +3,7 @@ import CourseCardGrid from './CourseCardGrid.astro'
 import CourseCard from './CourseCard.astro'
 import Container from '@components/atoms/Container.astro'
 import HeadingGroup from '../HeadingGroup.astro'
+import Section from '@components/atoms/Section.astro'
 import { getExamViaID, type CertificationExamType } from '@lib/sanity'
 import type { HeadingSize } from 'bl-astro'
 interface Props {
@@ -27,7 +28,7 @@ async function fetchCards(){
 
 await fetchCards()
 ---
-<>
+<Section paddingY="md">
     <Container width={width} marginY={['md', 0]}>
         {heading && <HeadingGroup heading={heading} subheading={subheading} size={headingGroupSize} />}
     </Container>
@@ -50,4 +51,4 @@ await fetchCards()
             ))}
         </CourseCardGrid>
     </Container>
-</>
+</Section>
