@@ -1,0 +1,61 @@
+---
+import Container from '@components/atoms/Container.astro'
+import type { CTAType } from '@lib/sanity'
+import type { TshirtSize, HeadingSize, Colors } from 'bl-astro'
+import Section from '@components/Section.astro'
+import Link from '@components/Link.astro'
+import Heading from '@components/atoms/Heading.astro'
+import Flex from '@components/atoms/Flex.astro'
+const DarkColorsArray = ['dark-blue-300', 'blue-fuchsia-gradient', 'blue-800', 'blue-300']
+const LightColorsArray = ['gray-50', 'white', 'blue-50']
+
+interface Props{
+    heading: string
+    size: HeadingSize
+    ctas?: CTAType[]
+    bgColor?: 
+        | 'gray-50'
+		| 'white'
+		| 'blue-300'
+		| 'dark-blue-300'
+		| 'blue-fuchsia-gradient'
+		| 'blue-50'
+		| 'blue-800'
+    width?: TshirtSize
+}
+const { heading, ctas, bgColor="gray-50", width="md", size } = Astro.props
+const isDark = (color: string) : boolean => {
+    return DarkColorsArray.includes(color)
+}
+
+const isLight = (color: string) : boolean => {
+    return LightColorsArray.includes(color)
+}
+let textColor: "black" | "white" = "black"
+
+if(isDark(bgColor)){
+    textColor = "white"
+} else if(isLight(bgColor)){
+    textColor = "black"
+}
+else {
+    throw Error(`Invalid background color, ${bgColor}`)
+}
+---
+
+<Section bg={bgColor} paddingY="lg">
+    <Container width={width}>
+        <Flex align='center' direction='column' gap=".5rem">
+        <Heading size={size} color={textColor}>{heading}</Heading>
+        <div class="portable-text"><slot/></div>
+        {ctas && ctas.map((cta)=> (
+            <Link href={cta.externalLink} variant={cta.variant}>{cta.ctaText}</Link>
+        )) }</Flex>
+    </Container>
+</Section>
+
+<style define:vars={{'text-color': textColor} }>
+    .portable-text {
+        color: var(--text-color);
+    }
+</style>

@@ -1,0 +1,7 @@
+---
+import Link from "@components/Link.astro";
+const {...attrs} = Astro.props
+const { markDef, children} = Astro.props.node;
+---
+
+<Link {...attrs} href={markDef.href} variant="inline">{children[0].text}</Link>

@@ -9,11 +9,13 @@ import announcementBanner from './modules/announcementBanner'
 import courseCardGrid from './modules/courseCardGrid'
 import courseCardSection from './modules/courseCardSection'
 import testimonialSection from './modules/testimonialSection'
+import fullWidthBanner from './modules/fullWidthBanner'
 
 // Other fields
 import allyImage from './fields/allyImage'
 import heading from './fields/heading'
 import blockContent from './fields/blockContent'
+import bannerBlockContent from './fields/bannerBlockContent'
 import examDetails from './fields/examDetails'
 import cta from './fields/cta'
 import headingGroup from './fields/headingGroup'
@@ -28,14 +30,16 @@ export const schemaTypes = [
   // Modules
   hero,
   announcementBanner,
-  blockContent,
   courseCardGrid,
   courseCardSection,
   testimonialSection,
+  fullWidthBanner,
 
   // Other fields
   allyImage,
   examDetails,
+  blockContent,
+  bannerBlockContent,
   heading,
   headingGroup,
   cta,

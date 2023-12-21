@@ -1,12 +1,12 @@
 ---
 import BareLayout from '../../layouts/BareLayout.astro'
-import { getPages, getPage, getModuleViaKey } from '@lib/sanity'
+import { getPages, getPage } from '@lib/sanity'
 import type { InferGetStaticParamsType } from 'astro'
 import type {
   ModuleReference,
-  HeroType,
   AnnouncementBannerType,
   CourseCardSectionType,
+  FullWidthBannerType
 } from '@lib/sanity'
 import Text from '@components/atoms/Text.astro'
 import Container from '@components/atoms/Container.astro'
@@ -18,10 +18,10 @@ import SanityImage from '@components/atoms/SanityImage.astro'
 import Section from '@components/Section.astro'
 import Link from '@components/Link.astro'
 import Flex from '@components/atoms/Flex.astro'
-import CourseCard from '@components/molecules/CourseCard/CourseCard.astro'
 import CourseCardSection from '@components/molecules/CourseCard/CourseCardSection.astro'
-import Testimonial from '@components/molecules/Testimonial/Testimonial.astro'
 import TestimonialSection from '@components/molecules/Testimonial/TestimonialSection.astro'
+import PortableText from '@components/portableText/PortableText.astro'
+import FullWidthBanner from '@components/molecules/FullWidthBanner.astro'
 
 export async function getStaticPaths() {
   const pages = await getPages()
@@ -104,8 +104,6 @@ const modules: ModuleReference[] = page.modules
             case 'testimonialSection':
               const testimonialSection = item as TestimonialSection
               return (
-                <Section>
-                  <Container width={testimonialSection.width}>
                     <TestimonialSection
                       heading={testimonialSection.testimonialHeading.heading}
                       subheading={testimonialSection.testimonialHeading.subheading}
@@ -113,9 +111,16 @@ const modules: ModuleReference[] = page.modules
                       cta={testimonialSection.testimonialCta}
                       testimonials={testimonialSection.testimonialCards}
                       columnsAtFullWidth={testimonialSection.columnsAtFullWidth}
-                      ></TestimonialSection>
-                  </Container>
-                </Section>
+                      />
+                  
+              )
+            case 'fullWidthBanner':
+              const banner = item as FullWidthBannerType
+              const bgColor = banner.backgroundColor.label.split(" ").join("-").toLowerCase()
+              return (
+                <FullWidthBanner heading={banner.heading.heading} size={banner.heading.headingSize} ctas={banner.cta} width={banner.contentWidth} bgColor={bgColor}>
+                  <PortableText portableText={banner.body} />
+                </FullWidthBanner>
               )
             default:
               throw new Error(`Unknown module type: ${item._type}`)

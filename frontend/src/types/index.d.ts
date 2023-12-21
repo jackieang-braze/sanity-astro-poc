@@ -10,4 +10,12 @@ declare module 'bl-astro' {
 		| 'android'
 		| 'web'
 		| 'ios'
+	export type Colors =
+		| 'gray-50'
+		| 'white'
+		| 'blue-50'
+		| 'dark-blue-300'
+		| 'blue-fuchsia-gradient'
+		| 'blue-800'
+		| 'blue-300'
 }

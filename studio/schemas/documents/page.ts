@@ -28,7 +28,12 @@ export default defineType({
       name: 'modules',
       title: 'Modules',
       type: 'array',
-      of: [{type: 'announcementBanner'}, {type: 'courseCardSection'}, {type: 'testimonialSection'}],
+      of: [
+        {type: 'announcementBanner'},
+        {type: 'courseCardSection'},
+        {type: 'testimonialSection'},
+        {type: 'fullWidthBanner'},
+      ],
     }),
   ],
 })

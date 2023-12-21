@@ -99,7 +99,6 @@ export default defineType({
       options: {
         list: [
           {title: 'Primary', value: 'primary'},
-          {title: 'Secondary', value: 'secondary'},
           {title: 'Tertiary', value: 'tertiary'},
         ],
       },

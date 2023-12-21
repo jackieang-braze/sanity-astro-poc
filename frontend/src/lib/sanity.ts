@@ -1,7 +1,8 @@
 import { sanityClient } from 'sanity:client'
 import type { PortableTextBlock, Slug, Image } from 'sanity'
 import groq from 'groq'
-import type { HeadingSize, TshirtSize } from 'bl-astro'
+import type { Colors, HeadingSize, TshirtSize } from 'bl-astro'
+import Heading from '@components/atoms/Heading.astro'
 
 export async function getExams(): Promise<CertificationExamType[]> {
 	return await sanityClient.fetch(groq`*[_type == "certificationExam" && defined(slug.current) ]`)
@@ -97,6 +98,7 @@ export interface ModuleTypes {
 	cta: CTAType
 	courseCardSection: CourseCardSectionType
 	testimonialSection: TestimonialSectionType
+	fullWidthBanner: FullWidthBannerType
 }
 
 export interface ModuleReference {
@@ -139,7 +141,7 @@ export interface CourseCardGridType {
 	cardSection: CertificationExamType[]
 }
 export interface HeadingGroupType {
-	_type: 'headingGroup'
+	_type: 'headingGroup' | 'heading'
 	_rev: string
 	_id: string
 	_ref: string
@@ -196,4 +198,21 @@ export interface TestimonialCardType {
 
 export interface AllyImage extends Image {
 	alt: string
+}
+
+export interface FullWidthBannerType {
+	_type: 'fullWidthBanner'
+	_rev: string
+	_id: string
+	_ref: string
+	heading: HeadingGroupType
+	body: PortableTextBlock[]
+	cta: CTAType[]
+	backgroundColor: Color
+	contentWidth: TshirtSize
+}
+
+export interface Color {
+	label: string
+	value: string
 }

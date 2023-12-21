@@ -1,0 +1,9 @@
+---
+import Text from "@components/atoms/Text.astro";
+
+const {...attrs} = Astro.props
+const { style } = Astro.props.node
+
+---
+
+<Text {...attrs} size={style}><slot/></Text>

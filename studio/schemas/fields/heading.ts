@@ -6,7 +6,7 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'text',
+      name: 'heading',
       title: 'Heading',
       type: 'string',
     }),
@@ -16,12 +16,12 @@ export default defineType({
       type: 'string',
       options: {
         list: [
+          {title: 'D1', value: 'd1'},
+          {title: 'D2', value: 'd2'},
           {title: 'H1', value: 'h1'},
           {title: 'H2', value: 'h2'},
           {title: 'H3', value: 'h3'},
           {title: 'H4', value: 'h4'},
-          {title: 'H5', value: 'h5'},
-          {title: 'H6', value: 'h6'},
         ],
       },
       initialValue: 'h1',
