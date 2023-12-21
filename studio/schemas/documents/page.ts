@@ -33,6 +33,7 @@ export default defineType({
         {type: 'courseCardSection'},
         {type: 'testimonialSection'},
         {type: 'fullWidthBanner'},
+        {type: 'faqSection'},
       ],
     }),
   ],

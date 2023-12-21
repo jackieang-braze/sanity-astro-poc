@@ -1,15 +1,31 @@
 ---
 import Flex from '@components/atoms/Flex.astro'
 import Heading from '@components/atoms/Heading.astro'
+import Container from '@components/atoms/Container.astro'
+import FAQBlock from './FAQBlock.astro'
+import Section from '@components/Section.astro'
+import type { HeadingSize, TshirtSize } from 'bl-astro'
+import type { FAQContentType } from '@lib/sanity'
 interface Props {
 	heading: string
+	width: TshirtSize
+	headingSize: HeadingSize
+	blocks: FAQContentType[]
 }
-const { heading } = Astro.props
+const { heading, width, blocks, headingSize } = Astro.props
 ---
-
-<Flex gap="22px">
-	<Heading size="h3">{heading}</Heading>
-	<Flex gap="2px">
-		<slot />
+<Section paddingY="lg">
+<Container width={width}>
+	<Flex direction="column" gap="22px">
+		<Heading size={headingSize}>{heading}</Heading>
+		<Flex gap="22px" direction="column">
+			{blocks && blocks.map((block) => (
+				<FAQBlock heading={block.heading} questions={block.questions} />
+				))}
+			<Flex gap="2px">
+				<slot />
+			</Flex>
+		</Flex>
 	</Flex>
-</Flex>
+</Container>
+</Section>

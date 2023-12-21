@@ -2,23 +2,14 @@ import {defineType, defineArrayMember} from 'sanity'
 
 export default defineType({
   title: 'Banner Block Content',
-  name: 'bannerBlockContent',
+  name: 'faqBlockContent',
   type: 'array',
-  description:
-    'By default, text size will adjust to the size of the heading (i.e. H1 will be Paragraph Lg)',
 
   of: [
     defineArrayMember({
       title: 'Block',
       type: 'block',
-
-      styles: [
-        {title: 'Default', value: 'normal'},
-        {title: 'Paragrpah Small', value: 'sm'},
-        {title: 'Paragraph Medium', value: 'md'},
-        {title: 'Paragraph Large', value: 'lg'},
-        {title: 'Paragraph Extra Large', value: 'xl'},
-      ],
+      styles: [{title: 'Normal', value: 'normal'}],
       // Marks let you mark up inline text in the block editor.
       marks: {
         // Decorators usually describe a single property – e.g. a typographic

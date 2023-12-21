@@ -1,7 +1,9 @@
 ---
+import PortableText from '@components/portableText/PortableText.astro'
+import type {PortableTextBlock} from 'sanity'
 interface Props {
 	summary: string
-	body: string
+	body: PortableTextBlock[]
 }
 const { summary, body } = Astro.props
 ---
@@ -11,7 +13,9 @@ const { summary, body } = Astro.props
 		{summary}
 		<span class="chevron-down material-symbols-outlined"> expand_more</span>
 	</summary>
-	<Fragment set:html={body} />
+	<!-- <Fragment set:html={body} /> -->
+	<PortableText portableText={body} />
+	</details>
 
 	<style>
 		details {

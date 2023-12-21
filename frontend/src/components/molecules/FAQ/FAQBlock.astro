@@ -1,0 +1,17 @@
+---
+import type { FAQType } from '@lib/sanity'
+import Flex from '@components/atoms/Flex.astro'
+import Heading from '@components/atoms/Heading.astro'
+import FAQDetail from './FAQDetail.astro'
+interface Props{
+    heading: string
+    questions: FAQType[]
+}
+const { heading, questions } = Astro.props
+---
+
+<Flex gap="22px" direction="column">
+    <Heading size="h4">{heading}</Heading>
+    <Flex gap="2px">{questions && questions.map((question) => 
+    <FAQDetail summary={question.question} body={question.answer}/>)}</Flex>
+</Flex>

@@ -6,7 +6,9 @@ import type {
   ModuleReference,
   AnnouncementBannerType,
   CourseCardSectionType,
-  FullWidthBannerType
+  FullWidthBannerType,
+  FAQSectionType,
+  TestimonialSectionType,
 } from '@lib/sanity'
 import Text from '@components/atoms/Text.astro'
 import Container from '@components/atoms/Container.astro'
@@ -18,10 +20,12 @@ import SanityImage from '@components/atoms/SanityImage.astro'
 import Section from '@components/Section.astro'
 import Link from '@components/Link.astro'
 import Flex from '@components/atoms/Flex.astro'
-import CourseCardSection from '@components/molecules/CourseCard/CourseCardSection.astro'
 import TestimonialSection from '@components/molecules/Testimonial/TestimonialSection.astro'
+import CourseCardSection from '@components/molecules/CourseCard/CourseCardSection.astro'
 import PortableText from '@components/portableText/PortableText.astro'
 import FullWidthBanner from '@components/molecules/FullWidthBanner.astro'
+import FAQSection from '@components/molecules/FAQ/FAQSection.astro'
+import FAQDetail from '@components/molecules/FAQ/FAQDetail.astro'
 
 export async function getStaticPaths() {
   const pages = await getPages()
@@ -102,7 +106,7 @@ const modules: ModuleReference[] = page.modules
                   </Section>
               )
             case 'testimonialSection':
-              const testimonialSection = item as TestimonialSection
+              const testimonialSection = item as TestimonialSectionType
               return (
                     <TestimonialSection
                       heading={testimonialSection.testimonialHeading.heading}
@@ -122,6 +126,11 @@ const modules: ModuleReference[] = page.modules
                   <PortableText portableText={banner.body} />
                 </FullWidthBanner>
               )
+
+            case 'faqSection':
+              const faqSection = item as FAQSectionType
+              return <FAQSection heading={faqSection.heading.heading} headingSize={faqSection.heading.headingSize} width="md" blocks={faqSection.content}/>
+
             default:
               throw new Error(`Unknown module type: ${item._type}`)
           }
