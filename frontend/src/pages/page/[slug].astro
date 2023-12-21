@@ -90,7 +90,7 @@ const heroTextColor = accessibleTextColor(heroBgColor)
             case 'courseCardSection':
               const section = item as CourseCardSectionType
               return (
-              <>
+              <Section paddingY='md'>
                   {section.content && section.content.map((grid) =>
                 (
                   <CourseCardSection
@@ -103,7 +103,7 @@ const heroTextColor = accessibleTextColor(heroBgColor)
                 />                 
                 )
               )}
-              </>)
+              </Section>)
             
             case 'testimonialSection':
               const testimonialSection = item as TestimonialSectionType
