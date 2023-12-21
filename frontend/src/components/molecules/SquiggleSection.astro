@@ -1,11 +1,11 @@
 ---
 import Container from '@components/atoms/Container.astro'
-import type { TshirtSize } from 'bl-astro'
+import type { TshirtSize, Colors } from 'bl-astro'
 import type { Image } from 'sanity'
 interface Props {
-	bgColor?: 'blue-fuchsia-gradient' | 'white' | 'black' | 'blue-300'
+	bgColor?: Colors
 	color?: 'white' | 'black'
-	bgImage: 'squiggle-1' | 'squiggle-2' | 'certification-squiggle' | Image
+	bgImage: Image
 	paddingY?: TshirtSize
 }
 const { bgColor, bgImage, paddingY = 'lg' } = Astro.props

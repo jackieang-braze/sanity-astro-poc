@@ -1,13 +1,12 @@
 ---
 import Container from '@components/atoms/Container.astro'
 import type { CTAType } from '@lib/sanity'
-import type { TshirtSize, HeadingSize, Colors } from 'bl-astro'
-import Section from '@components/Section.astro'
-import Link from '@components/Link.astro'
+import type { TshirtSize, HeadingSize } from 'bl-astro'
+import Section from '@components/atoms/Section.astro'
+import Link from '@components/atoms/Link.astro'
 import Heading from '@components/atoms/Heading.astro'
 import Flex from '@components/atoms/Flex.astro'
-const DarkColorsArray = ['dark-blue-300', 'blue-fuchsia-gradient', 'blue-800', 'blue-300']
-const LightColorsArray = ['gray-50', 'white', 'blue-50']
+import { accessibleTextColor } from '@lib/accessibleTextColor'
 
 interface Props{
     heading: string
@@ -24,23 +23,8 @@ interface Props{
     width?: TshirtSize
 }
 const { heading, ctas, bgColor="gray-50", width="md", size } = Astro.props
-const isDark = (color: string) : boolean => {
-    return DarkColorsArray.includes(color)
-}
 
-const isLight = (color: string) : boolean => {
-    return LightColorsArray.includes(color)
-}
-let textColor: "black" | "white" = "black"
-
-if(isDark(bgColor)){
-    textColor = "white"
-} else if(isLight(bgColor)){
-    textColor = "black"
-}
-else {
-    throw Error(`Invalid background color, ${bgColor}`)
-}
+const textColor= accessibleTextColor(bgColor)
 ---
 
 <Section bg={bgColor} paddingY="lg">

@@ -17,15 +17,16 @@ import Heading from '@components/atoms/Heading.astro'
 import AnnouncementBanner from '@components/molecules/AnnouncementBanner.astro'
 import Layout from '@layouts/Layout.astro'
 import SanityImage from '@components/atoms/SanityImage.astro'
-import Section from '@components/Section.astro'
-import Link from '@components/Link.astro'
+import Section from '@components/atoms/Section.astro'
+import Link from '@components/atoms/Link.astro'
 import Flex from '@components/atoms/Flex.astro'
 import TestimonialSection from '@components/molecules/Testimonial/TestimonialSection.astro'
 import CourseCardSection from '@components/molecules/CourseCard/CourseCardSection.astro'
 import PortableText from '@components/portableText/PortableText.astro'
 import FullWidthBanner from '@components/molecules/FullWidthBanner.astro'
 import FAQSection from '@components/molecules/FAQ/FAQSection.astro'
-import FAQDetail from '@components/molecules/FAQ/FAQDetail.astro'
+import type { Colors } from 'bl-astro'
+import { accessibleTextColor } from '@lib/accessibleTextColor'
 
 export async function getStaticPaths() {
   const pages = await getPages()
@@ -42,19 +43,20 @@ type Params = InferGetStaticParamsType<typeof getStaticPaths>
 const { slug } = Astro.params as Params
 const page = await getPage(slug)
 const modules: ModuleReference[] = page.modules
-
+const heroBgColor = page.hero.background.color.label.split(" ").join("-").toLowerCase() as Colors
+const heroTextColor = accessibleTextColor(heroBgColor)
 ---
 
 <Layout title={slug}>
   <BareLayout>
-    <SquiggleSection bgImage={page.hero.image}>
+    <SquiggleSection bgImage={page.hero.image} bgColor={heroBgColor}>
       <Flex direction="column" gap="var(--space-md)">
         <Flex direction='column' gap="1rem">
       {
-        page.hero.eyebrow && <Text weight={600} size="md">{page.hero.eyebrow}</Text>
+        page.hero.eyebrow && <Text weight={600} size="md" color={heroTextColor}>{page.hero.eyebrow}</Text>
         }
-      <Heading size='d2'>{page.hero.heading}</Heading>
-      <Text size="lg">{page.hero.subheading}</Text>
+      <Heading size='d2' color={heroTextColor}>{page.hero.heading}</Heading>
+      <Text size="lg" color={heroTextColor}>{page.hero.subheading}</Text>
       </Flex>
     <Flex direction='row' gap='var(--space-sm)'>{page.hero.ctas && 
         page.hero.ctas.map((cta) =>

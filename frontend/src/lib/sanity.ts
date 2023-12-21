@@ -116,7 +116,12 @@ export interface HeroType {
 	heading: string
 	subheading: string
 	image: Image
+	background: BackgroundType
 	ctas: CTAType[]
+}
+export interface BackgroundType {
+	image: Image
+	color: Color
 }
 export interface AnnouncementBannerType {
 	_type: 'announcementBanner'
